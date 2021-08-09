@@ -1,61 +1,39 @@
-import React,{ useState } from 'react';
+import React,{ useReducer } from 'react';
 import axios from 'axios';
-
-const sToTime=(duration)=> {
-    let seconds= parseInt(duration % 60);
-    let minutes= duration / 60;
-    let hours= parseInt(minutes / 60);
-    minutes= parseInt(minutes % 60);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-  
-    return(hours + ":" + minutes + ":" + seconds);
-}
+import { initialVideo, reducer } from '../reducers/YoutubeReducer';
+import { sToTime, bytesToMb } from './Converters';
 
 const Test = () => {
-    const [videoUrl, setVideoUrl] = useState('');
-    const [videoDetails, setVideoDetails] = useState(null);
-    const [links, setLinks] = useState(null);
-    const [itag, setItag] = useState(null);
+    const [video, dispatch] = useReducer(reducer, initialVideo);
 
-    const handleSelectOption=(e)=>{
-        const itag= e.target.value;
-        setItag(itag);
-    }
-    
-    const searchVideoFormSubmit = async (e)=>{
+    const searchVideo = async (e)=>{
         e.preventDefault();
-        const res= await axios.get(`/api/youtube/video-requiredInfo?url=${videoUrl.trim()}`);
+        const res= await axios.get(`/api/youtube/video-requiredInfo?url=${video.url.trim()}`);
         const data= res.data;
-        console.log(data);
-        setVideoDetails({ title:data.title, thumbnail:data.thumbnail, duration:sToTime(data.lengthSeconds) });
-        setLinks(data.links.filter(link=>{
-            return link.type === "mp4" && link.hasVideo && link.hasAudio
-        }).map(link=>{
-            return({ type:link.type, qualityLabel:link.qualityLabel, itag:link.itag })
-        })
-        )
-        if(links){
-            setItag(links[0].itag);
-        }
+        // console.log(data);
+        let {title, thumbnail, lengthSeconds} = data;
+        dispatch( {type:"details", payload:{title, thumbnail, duration:sToTime(lengthSeconds)}} );
+        const formats = data.formats.filter(format=>{
+            return format.type === "mp4" && format.hasVideo && format.hasAudio
+        });
+        dispatch( {type:"formats", payload:formats} );
+        dispatch( {type:"itag", payload:formats[0].itag} );
     }
 
-    const DownloadVideoForm=()=>{
-        if(!links){return ''}
+    const ShowVideoDetailsContainer=()=>{
+        if(!video.formats.length){return ''}
         return(
             <>
-            <h2>{videoDetails.title}</h2>
-            <img src={videoDetails.thumbnail} className="thumbnail" alt={videoDetails.title} />
-            <p>Duration {videoDetails.duration}</p>
-            <form onSubmit={DownloadVideoFormSubmit}>
-                <select onChange={e=>handleSelectOption(e)} value={itag} >
+            <h2>{video.details.title}</h2>
+            <img src={video.details.thumbnail} className="thumbnail" alt={video.details.title} />
+            <p>Duration {video.details.duration}</p>
+            <form onSubmit={downloadVideo}>
+                <select onChange={e=>dispatch({type:'itag', payload:e.target.value})} value={video.itag} >
                 {
-                    links.map((link, index)=>{
+                    video.formats.map((format, index)=>{
                         return(
-                            <option key={index} value={link.itag}>
-                                {link.type} - {link.qualityLabel}
+                            <option key={index} value={format.itag}>
+                                {format.type} - {format.qualityLabel} {format.contentLength ? ` - ${bytesToMb(format.contentLength)} MB` : ''}
                             </option>
                         )
                     })
@@ -67,26 +45,30 @@ const Test = () => {
         )
     }
 
-    const DownloadVideoFormSubmit = async (e)=>{
+    const downloadVideo = async (e)=>{
         e.preventDefault();
-        console.log(itag);
-        window.location.href=`${window.location.href}/api/youtube/download?url=${videoUrl}&itag=${itag}`;
+        // console.log(video.itag);
+        if(process.env.NODE_ENV==="production"){
+            window.location.href=`${window.location.href}api/youtube/download?url=${video.url}&itag=${video.itag}&title=${video.details.title}`;
+        }else{
+            window.location.href=`http://localhost:5000/api/youtube/download?url=${video.url}&itag=${video.itag}&title=${video.details.title}`;
+        }
     }
     
     return (
         <>
          <div className="container hv-center">
             <h1 className="heading">YouTube Video Downloader</h1>
-            <form action="" method="POST" className="s-form" onSubmit={searchVideoFormSubmit}>
+            <form action="" method="POST" className="s-form" onSubmit={searchVideo}>
                 <input type="text" className="url-input" required={true}
                     placeholder="Video URL e.g. https://www.youtube.com/watch?v=wAD9uO9YAQw" 
-                        value={videoUrl} onChange={(e)=>setVideoUrl(e.target.value)}
+                        value={video.url} onChange={(e)=>dispatch({type:"url", payload:e.target.value})}
                     />
                 <button className="btn green-btn">Search</button>
             </form>
         </div>
         <div className="container">
-            <DownloadVideoForm/>
+            <ShowVideoDetailsContainer/>
         </div>
         </>
     )
