@@ -48,8 +48,7 @@ router.get('/video-requiredInfo', async (req, res)=>{
 
 router.get('/download', (req, res)=>{
     try{
-        const url= req.query.url;
-        const itag= req.query.itag;
+        const {url,itag, clen}= req.query;
         const title= req.query.title || "video";
         if(!url || !itag){
             return res.status(404).json({error:"Enter URL / Itag"});
@@ -57,6 +56,10 @@ router.get('/download', (req, res)=>{
             return res.status(404).send("Not a valid YouTube URL");    
         }
         res.header("Content-Disposition", `attachment; filename="${title}.mp4"` );
+        res.header('Content-Type', 'video/mp4');
+        if(clen){
+            res.header('Content-Length', clen);
+        }
         ytdl(url,{
             filter: format => format.itag==itag
         }).pipe(res);

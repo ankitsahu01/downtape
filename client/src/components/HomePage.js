@@ -16,8 +16,9 @@ const HomePage = () => {
         const formats = data.formats.filter(format=>{
             return format.type === "mp4" && format.hasVideo && format.hasAudio
         });
+        // console.log(formats);
         dispatch( {type:"formats", payload:formats} );
-        dispatch( {type:"itag", payload:formats[0].itag} );
+        dispatch( { type:"toDownload", payload:{ 'itag':formats[0].itag } } );
     }
 
     const ShowVideoDetailsContainer=()=>{
@@ -28,7 +29,7 @@ const HomePage = () => {
             <img src={video.details.thumbnail} className="thumbnail" alt={video.details.title} />
             <p>Duration {video.details.duration}</p>
             <form onSubmit={downloadVideo}>
-                <select onChange={e=>dispatch({type:'itag', payload:e.target.value})} value={video.itag} >
+                <select onChange={e=>dispatch({ type:'toDownload', payload:{'itag':e.target.value} })} value={video.toDownload.itag} >
                 {
                     video.formats.map((format, index)=>{
                         return(
@@ -47,11 +48,11 @@ const HomePage = () => {
 
     const downloadVideo = async (e)=>{
         e.preventDefault();
-        // console.log(video.itag);
+        // console.log(video.toDownload.itag);
         if(process.env.NODE_ENV==="production"){
-            window.location.href=`${window.location.href}api/youtube/download?url=${video.url}&itag=${video.itag}&title=${video.details.title}`;
+            window.location.href=`${window.location.href}api/youtube/download?url=${video.url}&itag=${video.toDownload.itag}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
         }else{
-            window.location.href=`http://localhost:5000/api/youtube/download?url=${video.url}&itag=${video.itag}&title=${video.details.title}`;
+            window.location.href=`http://localhost:5000/api/youtube/download?url=${video.url}&itag=${video.toDownload.itag}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
         }
     }
     
