@@ -1,13 +1,14 @@
-import './App.css';
 import React from 'react';
+import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
-import Test from './components/Test';
+import Test2 from './components/Test2';
 
 function App(){
   return(
     <>
+      <Navbar/>
       {/* <HomePage/> */}
-      <Test/>
+      <Test2/>
     </>
   )
 }

@@ -1,4 +1,5 @@
 export const initialVideo={
+    'toggleLoader':{ 'display':'none' },
     'url': '',
     'toDownload': { 'itag':'', 'contentLength':'' },
     'details': {},

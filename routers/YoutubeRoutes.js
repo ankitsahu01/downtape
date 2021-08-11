@@ -6,7 +6,7 @@ const https = require('https');
 const getContentLength= (url)=>{
     return new Promise(((resolve, reject) => {
         const request = https.request(url, (response) => {
-            let clen= response.headers['content-length'];
+            const clen= response.headers['content-length'];
             resolve(JSON.parse(clen));
             response.on('error', (error) => {
                 throw error;
@@ -20,7 +20,7 @@ router.get('/video-requiredInfo', async (req, res)=>{
     try{
         const url= req.query.url;
         if( !ytdl.validateURL(url) ){
-            return res.status(404).send("Not a valid YouTube URL");    
+            return res.status(404).json("Invalid URL");  
         }
         const info= await ytdl.getInfo(url);
         const requiredInfo={
@@ -48,7 +48,7 @@ router.get('/video-requiredInfo', async (req, res)=>{
 
 router.get('/download', (req, res)=>{
     try{
-        const {url,itag, clen}= req.query;
+        const {url, itag, clen}= req.query;
         const title= req.query.title || "video";
         if(!url || !itag){
             return res.status(404).json({error:"Enter URL / Itag"});
@@ -57,7 +57,7 @@ router.get('/download', (req, res)=>{
         }
         res.header("Content-Disposition", `attachment; filename="${title}.mp4"` );
         res.header('Content-Type', 'video/mp4');
-        if(clen){
+        if(clen!=0){
             res.header('Content-Length', clen);
         }
         ytdl(url,{
@@ -68,5 +68,6 @@ router.get('/download', (req, res)=>{
         res.status(404).send(err.message);
     }
 });
+
 
 module.exports = router;

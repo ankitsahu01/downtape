@@ -1,11 +1,14 @@
 import React, {useReducer} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import {Button, TextField, Typography, Grid} from '@material-ui/core';
+import {Container, Grid} from '@material-ui/core';
+import {Button, TextField, Typography} from '@material-ui/core';
 import { InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import {ImageList, ImageListItem, ImageListItemBar} from '@material-ui/core';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Fab from '@material-ui/core/Fab';
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { initialVideo, reducer } from '../reducers/YoutubeReducer';
 import { sToTime, bytesToMb } from './Converters';
@@ -39,23 +42,35 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function HomePage() {
+export default function Text2() {
     const [video, dispatch] = useReducer(reducer, initialVideo);
     const classes = useStyles();
 
     const searchVideo = async (e)=>{
-        e.preventDefault();
-        const res= await axios.get(`/api/youtube/video-requiredInfo?url=${video.url.trim()}`);
-        const data= res.data;
-        // console.log(data);
-        let {title, thumbnail, lengthSeconds} = data;
-        dispatch( {type:"details", payload:{title, thumbnail, duration:sToTime(lengthSeconds)}} );
-        const formats = data.formats.filter(format=>{
-            return format.type === "mp4" && format.hasVideo && format.hasAudio
-        });
-        // console.log(formats);
-        dispatch( {type:"formats", payload:formats} );
-        dispatch( { type:"toDownload", payload:{ 'itag':formats[0].itag } } );
+        try{
+            e.preventDefault();
+            dispatch( {type:"toggleLoader", payload:{'display':'block'}} );
+            const res= await axios.get(`/api/youtube/video-requiredInfo?url=${video.url.trim()}`);
+            dispatch( {type:"toggleLoader", payload:{'display':'none'}} );
+            const data= res.data;
+            // console.log(data);
+            let {title, thumbnail, lengthSeconds} = data;
+            dispatch( {type:"details", payload:{title, thumbnail, duration:sToTime(lengthSeconds)}} );
+            const formats = data.formats.filter(format=>{
+                return format.type === "mp4" && format.hasVideo && format.hasAudio
+            });
+            // console.log(formats);
+            dispatch( {type:"formats", payload:formats} );
+            dispatch( { type:"toDownload", payload:{ 'itag':formats[0].itag } } );
+        }catch(err){
+            dispatch( {type:"toggleLoader", payload:{'display':'none'}} );
+            if(err.response.status===404){
+                toast.error(err.response.data);
+                // console.log(err.response.data);
+            }else{
+                toast.error("Something Went Wrong, Try Later.");
+            }
+        }
     }
 
     const ShowVideoDetailsContainer=()=>{
@@ -86,7 +101,7 @@ function HomePage() {
                                 video.formats.map((format, index)=>{
                                     return(
                                         <MenuItem key={index} value={format.itag}>
-                                            {format.type} - {format.qualityLabel} {format.contentLength ? ` - ${bytesToMb(format.contentLength)} MB` : ''}
+                                            {format.type} - {format.qualityLabel} {format.contentLength ? ` - ${bytesToMb(format.contentLength)} Mb` : ''}
                                         </MenuItem>
                                     )
                                 })
@@ -143,6 +158,7 @@ function HomePage() {
                         value={video.url}
                         onChange={(e)=>dispatch({type:"url", payload:e.target.value})}
                         />
+                         <LinearProgress style={video.toggleLoader} />
                     </Grid>
                     <Grid item xs={12} sm={2}>
                         <Button
@@ -160,8 +176,7 @@ function HomePage() {
             </div>
         </Container>
         <ShowVideoDetailsContainer/>
+        <ToastContainer position="top-center" />
         </>
     );
 }
-
-export default HomePage;
