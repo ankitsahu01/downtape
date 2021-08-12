@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HomePage from './components/HomePage';
+// import HomePage from './components/HomePage';
 import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
 // import Test from './components/Test';
 
@@ -11,7 +11,7 @@ function App(){
     <Navbar/>
     <Switch>
       <Route path="/" exact>
-        <HomePage/>
+        <YoutubeVideosDownloader/>
       </Route>
       <Route path="/youtube-video-downloader" >
         <YoutubeVideosDownloader/>
