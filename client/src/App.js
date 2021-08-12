@@ -1,14 +1,25 @@
 import React from 'react';
+import {Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
-import Test2 from './components/Test2';
+import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
+// import Test from './components/Test';
 
 function App(){
   return(
     <>
-      <Navbar/>
-      {/* <HomePage/> */}
-      <Test2/>
+    <Navbar/>
+    <Switch>
+      <Route path="/" exact>
+        <HomePage/>
+      </Route>
+      <Route path="/youtube-video-downloader" >
+        <YoutubeVideosDownloader/>
+      </Route>
+      {/* <Route path="/test">
+        <Test/>
+      </Route> */}
+    </Switch>
     </>
   )
 }

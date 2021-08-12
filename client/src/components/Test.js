@@ -1,46 +1,78 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
+// const axios = require('axios');
+// const { parse } = require("node-html-parser");
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-});
+// const instagramPostLink = "https://www.instagram.com/p/CD5um-vHA33/";
 
-export default function LinearBuffer() {
-  const classes = useStyles();
-  const [progress, setProgress] = React.useState(0);
-  const [buffer, setBuffer] = React.useState(10);
+// async function getPostLink(url) {
 
-  const progressRef = React.useRef(() => {});
-  React.useEffect(() => {
-    progressRef.current = () => {
-      if (progress > 100) {
-        setProgress(0);
-        setBuffer(10);
-      } else {
-        const diff = Math.random() * 10;
-        const diff2 = Math.random() * 10;
-        setProgress(progress + diff);
-        setBuffer(progress + diff + diff2);
-      }
-    };
-  });
+//   url = url + 'embed' + '/captioned';
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      progressRef.current();
-    }, 500);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+//   let res = axios.get(url).then(async (response) => {
+//     const root = parse(response.data);
 
-  return (
-    <div className={classes.root}>
-      <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
-    </div>
-  );
-}
+//     let link = "";
+//     if (response.data.search("video_url") != -1)
+//       link = getVideoLinkFromHtml(response.data);
+//     else
+//       link = root.querySelector('img.EmbeddedMediaImage').getAttribute("src");
+
+
+
+
+
+//     while (link.search("&amp;") != -1) {
+//       link = link.replace("&amp;", "&");
+//     }
+//     let caption =await getCaptionFromHtml(response.data);
+
+//     return {link,caption};
+
+//   });
+
+//   return res;
+
+// }
+
+// async function getCaption(url) {
+
+
+//   url = url + 'embed' + '/captioned';
+
+//   let res = axios.get(url).then((response) => {
+
+//     let caption= getCaptionFromHtml(response.data);
+
+//     return caption;
+
+//   });
+
+//   return res;
+
+// }
+
+// async function getCaptionFromHtml(html) {
+
+
+//   const root = parse(html);
+
+//   let caption=root.querySelector('.Caption')?.text;
+//   if(caption == undefined)
+//       caption="No caption";
+
+//   caption=caption.replace("view all comments","");
+//   return caption;
+
+// }
+
+// function getVideoLinkFromHtml(html) {
+//   let crop = "{\"" + html.substring(html.search("video_url"), html.search("video_url") + 1000);
+
+//   crop = crop.substring(0, crop.search(",")) + "}";
+
+//   return JSON.parse(crop).video_url;
+// }
+
+// (async ()=>{
+//     await getPostLink(instagramPostLink);
+// })();

@@ -13,6 +13,9 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    light: {
+      main: '#FFFFFF',
+    },
     youtube:{
       main: '#FF0000'
     }

@@ -1,5 +1,6 @@
 import React from 'react';
-import {AppBar, Toolbar, Typography} from '@material-ui/core';
+import {NavLink} from 'react-router-dom';
+import {AppBar, Toolbar, Typography, Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -11,9 +12,16 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  title: {
+    flexGrow: 1,
+  },
+  navlink: {
+    color: theme.palette.light.main,
+    textDecoration: 'none',
+  },
 }));
 
-function ScrollTop(props) {
+const ScrollTop=(props)=> {
   const { children, window } = props;
   const classes = useStyles();
   const trigger = useScrollTrigger({
@@ -36,7 +44,7 @@ function ScrollTop(props) {
   );
 }
 
-function HideOnScroll(props) {
+const HideOnScroll=(props)=> {
   const { children, window } = props;
   const trigger = useScrollTrigger({ target: window ? window() : undefined });
   return (
@@ -46,13 +54,19 @@ function HideOnScroll(props) {
   );
 }
 
-export default function Navbar(props) {
+const Navbar=(props)=> {
+  const classes = useStyles();
   return (
     <>
       <HideOnScroll {...props}>
         <AppBar>
           <Toolbar>
-            <Typography variant="h6">AIOV-Downloader</Typography>
+            <Typography variant="h6" component="h1" className={classes.title}>
+              <NavLink to="/" className={classes.navlink} >DOWNTAPE</NavLink>            
+            </Typography>
+            <Button color="inherit">
+              <NavLink to="/youtube-video-downloader" className={classes.navlink} >Download Youtube Video</NavLink>
+            </Button>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
@@ -65,36 +79,4 @@ export default function Navbar(props) {
     </>
   );
 }
-
-
-// import React from 'react';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Typography from '@material-ui/core/Typography';
-// import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-// import Slide from '@material-ui/core/Slide';
-
-// function HideOnScroll(props) {
-//   const { children, window } = props;
-//   const trigger = useScrollTrigger({ target: window ? window() : undefined });
-//   return (
-//     <Slide appear={false} direction="down" in={!trigger}>
-//       {children}
-//     </Slide>
-//   );
-// }
-
-// export default function Navbar(props) {
-//   return (
-//     <>
-//       <HideOnScroll {...props}>
-//         <AppBar>
-//           <Toolbar>
-//             <Typography variant="h6">Scroll to Hide App Bar</Typography>
-//           </Toolbar>
-//         </AppBar>
-//       </HideOnScroll>
-//       <Toolbar />
-//     </>
-//   );
-// }
+export default Navbar;
