@@ -6,7 +6,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/youtube',require('./routers/YoutubeRoutes'));
+app.use('/api/youtube', require('./routers/YoutubeRoutes'));
+app.use('/api/insta', require('./routers/InstaRoutes'));
 
 if(process.env.NODE_ENV==="production"){
     const path = require('path');

@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
 // import Test from './components/Test';
 
-function App(){
+const App=()=>{
   return(
     <>
     <Navbar/>
