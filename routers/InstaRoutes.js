@@ -6,10 +6,10 @@ const download = require('image-downloader')
 
 const getVideo = async (url) => {
   const html = await axios.get(url);
-  const $ = cheerio.load(html.data);
-  const videoString = $("meta[property='og:video']").attr("content");
-  const imgString = $("meta[property='og:image']").attr("content");
-  const caption = $("meta[property='og:title']").attr("content");
+  const $ = await cheerio.load(html.data);
+  const videoString = await $("meta[property='og:video']").attr("content");
+  const imgString = await $("meta[property='og:image']").attr("content");
+  const caption = await $("meta[property='og:title']").attr("content");
   console.log(imgString);
   return {videoString, imgString, caption};
 };
