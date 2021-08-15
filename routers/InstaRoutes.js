@@ -10,12 +10,14 @@ const getVideo = async (url) => {
   const videoString = $("meta[property='og:video']").attr("content");
   const imgString = $("meta[property='og:image']").attr("content");
   const caption = $("meta[property='og:title']").attr("content");
+  console.log(imgString);
   return {videoString, imgString, caption};
 };
 
 router.get('/info', async (req, res)=>{
     try{
         let url = req.query.url;
+        console.log(url);
         url= url.replace('?utm_medium=copy_link','');
         const {videoString, imgString, caption} = await getVideo(url);
         console.log(videoString, imgString, caption);
