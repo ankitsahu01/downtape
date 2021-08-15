@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const axios = require("axios");
-const cheerio = require("cheerio");
 const download = require('image-downloader')
+
+var cheerio = require('cheerio');
+if (typeof (cheerio) != 'function') cheerio = require('cheerio').default;
+
 
 const getVideo = async (url) => {
   const html = await axios.get(url);
