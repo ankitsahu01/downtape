@@ -2,15 +2,13 @@ const express = require('express');
 const router = express.Router();
 const axios = require("axios");
 const download = require('image-downloader')
-
-var cheerio = require('cheerio');
-if (typeof (cheerio) != 'function') cheerio = require('cheerio').default;
+const cheerio = require('cheerio');
 
 
 const getVideo = async (url) => {
   const html = await axios.get(url);
-  console.log(url);
   const $ = cheerio.load(html.data);
+  console.log($);
   const videoString = $("meta[property='og:video']").attr("content");
   const imgString = $("meta[property='og:image']").attr("content");
   const caption = $("meta[property='og:title']").attr("content");
