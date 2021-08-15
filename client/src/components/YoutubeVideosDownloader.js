@@ -51,7 +51,7 @@ const YoutubeVideosDownloader=()=> {
         try{
             e.preventDefault();
             dispatch( {type:"toggleLoader", payload:{'display':'block'}} );
-            const res= await axios.get(`/api/youtube/video-requiredInfo?url=${video.url.trim()}`);
+            const res= await axios.get(`/api/youtube/info?url=${video.url.trim()}`);
             dispatch( {type:"toggleLoader", payload:{'display':'none'}} );
             const data= res.data;
             // console.log(data);

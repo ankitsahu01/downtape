@@ -16,7 +16,7 @@ const getContentLength= (url)=>{
     }))
 }
 
-router.get('/video-requiredInfo', async (req, res)=>{
+router.get('/info', async (req, res)=>{
     try{
         const url= req.query.url;
         if( !ytdl.validateURL(url) ){

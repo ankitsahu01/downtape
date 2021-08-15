@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 // import HomePage from './components/HomePage';
 import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
-// import Test from './components/Test';
+import Test from './components/Test';
 
 const App=()=>{
   return(
@@ -16,9 +16,9 @@ const App=()=>{
       <Route path="/youtube-video-downloader" >
         <YoutubeVideosDownloader/>
       </Route>
-      {/* <Route path="/test">
+      <Route path="/test">
         <Test/>
-      </Route> */}
+      </Route>
     </Switch>
     </>
   )
