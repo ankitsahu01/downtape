@@ -18,6 +18,9 @@
     "express": "^4.17.1",
     "image-downloader": "^4.0.3",
     "metascraper": "^5.24.1",
+    "metascraper-image": "^5.24.1",
+    "metascraper-title": "^5.24.1",
+    "metascraper-video": "^5.24.1",
     "nodemon": "^2.0.12",
     "ytdl-core": "^4.9.1"
   }
