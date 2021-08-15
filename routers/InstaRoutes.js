@@ -7,7 +7,7 @@ const cheerio = require('cheerio');
 const { parse } = require("node-html-parser");
 
 async function getPostLink(url) {
-  url = url + 'embed' + '/captioned';
+  // url = url + 'embed' + '/captioned';
   let res = axios.get(url).then(async (response) => {
     const root = parse(response.data);
     let link = "";
@@ -25,7 +25,7 @@ async function getPostLink(url) {
 }
 
 async function getCaption(url) {
-  url = url + 'embed' + '/captioned';
+  // url = url + 'embed' + '/captioned';
   let res = axios.get(url).then((response) => {
     let caption= getCaptionFromHtml(response.data);
     return caption;
