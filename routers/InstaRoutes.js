@@ -6,19 +6,19 @@ const download = require('image-downloader')
 
 const getVideo = async (url) => {
   const html = await axios.get(url);
-  const $ = await cheerio.load(html.data);
-  const videoString = await $("meta[property='og:video']").attr("content");
-  const imgString = await $("meta[property='og:image']").attr("content");
-  const caption = await $("meta[property='og:title']").attr("content");
-  console.log(imgString);
+  console.log(url);
+  const $ = cheerio.load(html.data);
+  const videoString = $("meta[property='og:video']").attr("content");
+  const imgString = $("meta[property='og:image']").attr("content");
+  const caption = $("meta[property='og:title']").attr("content");
   return {videoString, imgString, caption};
 };
 
 router.get('/info', async (req, res)=>{
     try{
         let url = req.query.url;
-        console.log(url);
         url= url.replace('?utm_medium=copy_link','');
+        console.log(url);
         const {videoString, imgString, caption} = await getVideo(url);
         console.log(videoString, imgString, caption);
         const options= { url: imgString, dest: './backend_img' }
