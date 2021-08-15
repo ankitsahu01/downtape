@@ -18,7 +18,9 @@ router.get('/info', async (req, res)=>{
         let url = req.query.url;
         url= url.replace('?utm_medium=copy_link','');
         const {videoString, imgString, caption} = await getVideo(url);
-        const resp= await download.image({ url: imgString, dest: './backend_img' });
+        console.log(videoString, imgString, caption);
+        const options= { url: imgString, dest: './backend_img' }
+        const resp= await download.image(options);
         const imgName= resp.filename.replace('backend_img\\','');
         if (videoString !== undefined) {
           res.status(200).json({ videoLink:videoString, imgName, caption });
