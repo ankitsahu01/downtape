@@ -11,6 +11,26 @@ const fs= require('fs');
 const accessToken = 'JtKUGjuCPFsAAAAAAAAAAWbJANG9xElJmywUq2NtkabBf515_gu9ST9uuV7fMB8d';
 const dbx = new Dropbox({ accessToken, axios });
 
+
+const base64 = require('node-base64-image');
+(async()=>{
+  try{
+    const url = 'https://instagram.frpr1-2.fna.fbcdn.net/v/t51.2885-15/e35/226533970_991515171608290_8124624967778992359_n.jpg?_nc_ht=instagram.frpr1-2.fna.fbcdn.net&_nc_cat=110&_nc_ohc=XHVBp88-EC8AX8VJArV&edm=AABBvjUBAAAA&ccb=7-4&oh=4815701ebc483843547f6acd7f155906&oe=611D365B&_nc_sid=83d603';
+    const image = await base64.encode(url, {buffer: true});
+    
+    const filename= Date.now()+'_'+parseInt(Math.random()*999999)
+    console.log(filename);
+
+    await dbx.filesUpload({
+      path: `/${filename}.jpg`,
+      contents: image
+    });
+  }catch(err){
+    console.log(err);
+  }
+
+})();
+
 const UploadToDbx= (imgName)=>{
   return new Promise((resolve, reject)=>{
     fs.readFile(`./backend_img/${imgName}`, async (err, data)=>{
