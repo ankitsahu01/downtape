@@ -15,13 +15,13 @@ router.get('/info', async (req, res)=>{
         url= url.replace('?utm_medium=copy_link','');
         let shortcode= url.split('/');
         shortcode= shortcode[shortcode.length-2];
-        InstaClient.getPost(shortcode)
-          .then(post => console.log(post))
-          .catch(err => console.error(err));
 
+        const post = await InstaClient.getPost(shortcode);
+        console.log(post)
+        
         // let links = await instagramGetUrl(url);
         // console.log(links)
-        res.json("ok");
+        res.json(post);
     }catch(err){
         console.log(err);
         res.status(404).send(err.message);
