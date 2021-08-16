@@ -16,10 +16,12 @@ router.get('/info', async (req, res)=>{
         let shortcode= url.split('/');
         shortcode= shortcode[shortcode.length-2];
         
-        console.log(shortcode);
+        InstaClient.authBySessionId('49024374510%3AEqCrXsT2J9WYE1%3A11')
+          .then(account => console.log(account))
+          .catch(err => console.error(err));
 
         InstaClient.getPost(shortcode).then((post)=>{
-          console.log(post);
+          // console.log(post);
           res.status(200).json(post);
         }).catch((err)=>{
           console.log(err);
