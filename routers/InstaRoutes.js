@@ -18,12 +18,17 @@ router.get('/info', async (req, res)=>{
         
         console.log(shortcode);
 
-        const post = await InstaClient.getPost(shortcode);
-        console.log(post)
+        InstaClient.getPost(shortcode).then((post)=>{
+          console.log(post);
+          res.status(200).json(post);
+        }).catch((err)=>{
+          console.log(err);
+          res.status(404).json({error:"Something Went Wrong"});
+        })
         
         // let links = await instagramGetUrl(url);
         // console.log(links)
-        res.json(post);
+        // res.json(post);
     }catch(err){
         console.log(err);
         res.status(404).send(err.message);
