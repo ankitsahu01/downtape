@@ -6,6 +6,25 @@ const cheerio = require('cheerio');
 
 const { parse } = require("node-html-parser");
 
+const https = require('https');
+const getContentLength= (url)=>{
+    return new Promise(((resolve, reject) => {
+        const request = https.request(url, (response) => {
+            response.setEncoding('utf8');
+            response.on('data', (d)=>{
+              console.log(d);
+              const clen= response.headers['content-length'];
+              resolve(JSON.parse(clen));
+            })
+
+            response.on('error', (error) => {
+                throw error;
+            });
+        });
+        request.end();
+    }))
+}
+
 const getInfo = async (url) => {
   const html = await axios.get(url);
   const root = parse(html.data);
@@ -24,24 +43,7 @@ router.get('/info', async (req, res)=>{
     try{
         let url = req.query.url;
         url= url.replace('?utm_medium=copy_link','');
-        const https = require('https');
-        const getContentLength= (url)=>{
-            return new Promise(((resolve, reject) => {
-                const request = https.request(url, (response) => {
-                    response.setEncoding('utf8');
-                    response.on('data', (d)=>{
-                      console.log(d);
-                      const clen= response.headers['content-length'];
-                      resolve(JSON.parse(clen));
-                    })
-
-                    response.on('error', (error) => {
-                        throw error;
-                    });
-                });
-                request.end();
-            }))
-        }
+        
         const r= await getContentLength(url);
         // console.log(r);
 
