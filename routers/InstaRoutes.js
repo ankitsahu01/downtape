@@ -15,7 +15,6 @@ const UploadToDbx= (imgPrivateLink)=>{
     try{
       const bufferImage = await base64.encode(imgPrivateLink, {buffer: true});
       const imgName= Date.now()+'_'+parseInt(Math.random()*999999)+'.jpg';
-      console.log(imgName);
       await dbx.filesUpload({
         path: `/${imgName}`,
         contents: bufferImage

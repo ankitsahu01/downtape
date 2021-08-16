@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.light.main,
     textDecoration: 'none',
   },
+  activeNavLink: {
+    borderBottom: '1px solid #ffffff',
+  }
 }));
 
 const ScrollTop=(props)=> {
@@ -65,7 +68,10 @@ const Navbar=(props)=> {
               <NavLink to="/" className={classes.navlink} >DOWNTAPE</NavLink>            
             </Typography>
             <Button color="inherit">
-              <NavLink to="/youtube-video-downloader" className={classes.navlink} >Download Youtube Video</NavLink>
+              <NavLink to="/youtube-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink} >Download Youtube Video</NavLink>
+            </Button>
+            <Button color="inherit">
+              <NavLink to="/instagram-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink} >Download Instagram Video</NavLink>
             </Button>
           </Toolbar>
         </AppBar>
