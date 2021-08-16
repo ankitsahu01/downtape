@@ -8,19 +8,18 @@ const { parse } = require("node-html-parser");
 
 const https = require('https');
 const getContentLength= (url)=>{
-  console.log(url);
   return new Promise(((resolve, reject) => {
       const request = https.request(url, (response) => {
-          console.log(response);
+          // console.log(response);
           response.setEncoding('utf8');
           // console.log(response);
           response.on('data', (d)=>{
             // console.log(d);
             const clen= response.headers['content-length'];
-            console.log(clen);
+            // console.log(clen);
+            // console.log(response);
             resolve(JSON.parse(clen));
           })
-
           response.on('error', (error) => {
               throw error;
           });
@@ -49,7 +48,7 @@ router.get('/info', async (req, res)=>{
         url= url.replace('?utm_medium=copy_link','');
         
         const r= await getContentLength(url);
-        // console.log(r);
+        console.log(r);
 
         // const data = await getInfo(url);
         // console.log(data);
