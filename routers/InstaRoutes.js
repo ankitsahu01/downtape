@@ -13,10 +13,11 @@ const getContentLength= (url)=>{
       const request = https.request(url, (response) => {
           console.log(response);
           response.setEncoding('utf8');
-          console.log(response);
+          // console.log(response);
           response.on('data', (d)=>{
-            console.log(d);
+            // console.log(d);
             const clen= response.headers['content-length'];
+            console.log(clen);
             resolve(JSON.parse(clen));
           })
 
