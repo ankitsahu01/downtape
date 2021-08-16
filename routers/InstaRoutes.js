@@ -17,16 +17,18 @@ router.get('/info', async (req, res)=>{
         shortcode= shortcode[shortcode.length-2];
         
         InstaClient.authBySessionId('49024374510%3AEqCrXsT2J9WYE1%3A11')
-          .then(account => console.log(account))
-          .catch(err => console.error(err));
+          .then((account) => {
+            console.log(account);
+            InstaClient.getPost(shortcode).then((post)=>{
+              // console.log(post);
+              res.status(200).json(post);
+            }).catch((err)=>{
+              console.log(err);
+              res.status(404).json({error:"Something Went Wrong"});
+            })
+          }).catch(err => console.error(err));
 
-        InstaClient.getPost(shortcode).then((post)=>{
-          // console.log(post);
-          res.status(200).json(post);
-        }).catch((err)=>{
-          console.log(err);
-          res.status(404).json({error:"Something Went Wrong"});
-        })
+        
         
         // let links = await instagramGetUrl(url);
         // console.log(links)
