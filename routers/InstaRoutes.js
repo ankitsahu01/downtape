@@ -8,21 +8,24 @@ const { parse } = require("node-html-parser");
 
 const https = require('https');
 const getContentLength= (url)=>{
-    return new Promise(((resolve, reject) => {
-        const request = https.request(url, (response) => {
-            response.setEncoding('utf8');
-            response.on('data', (d)=>{
-              console.log(d);
-              const clen= response.headers['content-length'];
-              resolve(JSON.parse(clen));
-            })
+  console.log(url);
+  return new Promise(((resolve, reject) => {
+      const request = https.request(url, (response) => {
+          console.log(response);
+          response.setEncoding('utf8');
+          console.log(response);
+          response.on('data', (d)=>{
+            console.log(d);
+            const clen= response.headers['content-length'];
+            resolve(JSON.parse(clen));
+          })
 
-            response.on('error', (error) => {
-                throw error;
-            });
-        });
-        request.end();
-    }))
+          response.on('error', (error) => {
+              throw error;
+          });
+      });
+      request.end();
+  }))
 }
 
 const getInfo = async (url) => {
