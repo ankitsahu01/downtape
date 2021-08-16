@@ -1,41 +1,37 @@
 const express = require('express');
 const router = express.Router();
-const axios = require("axios");
-const download = require('image-downloader')
-const cheerio = require('cheerio');
-const { parse } = require("node-html-parser");
+const download = require('image-downloader');
 
 const Insta = require('scraper-instagram');
 const InstaClient = new Insta();
 
-// const instagramGetUrl = require("instagram-url-direct")
 router.get('/info', async (req, res)=>{
     try{
-        let url = req.query.url;
-        url= url.replace('?utm_medium=copy_link','');
-        let shortcode= url.split('/');
-        shortcode= shortcode[shortcode.length-2];
-        
-        InstaClient.authBySessionId('49024374510%3AEqCrXsT2J9WYE1%3A11')
-          .then((account) => {
-            console.log(account);
-            InstaClient.getPost(shortcode).then((post)=>{
-              // console.log(post);
-              res.status(200).json(post);
-            }).catch((err)=>{
-              console.log(err);
-              res.status(404).json({error:"Something Went Wrong"});
-            })
-          }).catch(err => console.error(err));
-
-        
-        
-        // let links = await instagramGetUrl(url);
-        // console.log(links)
-        // res.json(post);
-    }catch(err){
+      let url = req.query.url;
+      url= url.replace('?utm_medium=copy_link','');
+      let shortcode= url.split('/');
+      shortcode= shortcode[shortcode.length-2];
+      await InstaClient.authBySessionId('49024374510%3AEqCrXsT2J9WYE1%3A11');
+      const data = await InstaClient.getPost(shortcode);
+      // console.log(data);
+      const videoLink= data.contents[0].url;
+      const imgLink= data.contents[0].thumbnail;
+      const views= data.contents[0].views;
+      const likes= data.likes;
+      const caption= data.caption;
+      res.status(200).json({videoLink, imgLink, views, likes, caption});
+    }
+    catch(err){
+      if(err===401){
+        console.log('Invalid Insta SessionId');
+        res.status(404).json({error:"Invalid Insta SessionId"});
+      } else if(err===429){
+        console.log('Too Many Requests');
+        res.status(404).json({error:"Too Many Requests"});
+      }else{
         console.log(err);
-        res.status(404).send(err.message);
+        res.status(404).json(err);
+      }
     }
 });
 
