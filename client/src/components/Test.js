@@ -7,16 +7,14 @@ const Test = () => {
 
   const searchVideo= async ()=>{
     try{
-      
-
-      // const res= await axios(`/api/insta/info?url=${url}`);
-      // let {videoLink, imgName, caption}= res.data;
-      // console.log("IMG Name "+imgName);
-      // let imgLink= `http://localhost:5000/img/${imgName}`;
-      // if(process.env.NODE_ENV==="production"){
-      //   imgLink= `https://downtape.herokuapp.com/img/${imgName}`;
-      // }
-      // setData({videoLink, imgLink, caption});
+      const res= await axios(`/api/insta/info?url=${url}`);
+      let {videoLink, imgName, caption}= res.data;
+      console.log("IMG Name "+imgName);
+      let imgLink= `http://localhost:5000/img/${imgName}`;
+      if(process.env.NODE_ENV==="production"){
+        imgLink= `https://downtape.herokuapp.com/img/${imgName}`;
+      }
+      setData({videoLink, imgLink, caption});
     }catch(err){
       console.log(err.message);
     }

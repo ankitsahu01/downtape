@@ -15,6 +15,8 @@ router.get('/info', async (req, res)=>{
         url= url.replace('?utm_medium=copy_link','');
         let shortcode= url.split('/');
         shortcode= shortcode[shortcode.length-2];
+        
+        console.log(shortcode);
 
         const post = await InstaClient.getPost(shortcode);
         console.log(post)
