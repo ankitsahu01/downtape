@@ -1,58 +1,39 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const download = require('image-downloader');
+const base64 = require('node-base64-image');
 
 const Insta = require('scraper-instagram');
 const InstaClient = new Insta();
 
 const {Dropbox} = require('dropbox');
-const fs= require('fs');
 const accessToken = 'JtKUGjuCPFsAAAAAAAAAAWbJANG9xElJmywUq2NtkabBf515_gu9ST9uuV7fMB8d';
 const dbx = new Dropbox({ accessToken, axios });
 
-
-const base64 = require('node-base64-image');
-(async()=>{
-  try{
-    const url = 'https://instagram.frpr1-2.fna.fbcdn.net/v/t51.2885-15/e35/226533970_991515171608290_8124624967778992359_n.jpg?_nc_ht=instagram.frpr1-2.fna.fbcdn.net&_nc_cat=110&_nc_ohc=XHVBp88-EC8AX8VJArV&edm=AABBvjUBAAAA&ccb=7-4&oh=4815701ebc483843547f6acd7f155906&oe=611D365B&_nc_sid=83d603';
-    const image = await base64.encode(url, {buffer: true});
-    
-    const filename= Date.now()+'_'+parseInt(Math.random()*999999)
-    console.log(filename);
-
-    await dbx.filesUpload({
-      path: `/${filename}.jpg`,
-      contents: image
-    });
-  }catch(err){
-    console.log(err);
-  }
-
-})();
-
-const UploadToDbx= (imgName)=>{
-  return new Promise((resolve, reject)=>{
-    fs.readFile(`./backend_img/${imgName}`, async (err, data)=>{
-      try{
-        await dbx.filesUpload({
-          path: `/${imgName}`,
-          contents: data
-        });
-        const shareObj = await dbx.sharingCreateSharedLinkWithSettings({ 
-          path: `/${imgName}`,
-        });
-        const ShareableLink= shareObj.result.url;
+const UploadToDbx= (imgPrivateLink)=>{
+  return new Promise( async (resolve, reject)=>{
+    try{
+      const bufferImage = await base64.encode(imgPrivateLink, {buffer: true});
+      const imgName= Date.now()+'_'+parseInt(Math.random()*999999)+'.jpg';
+      console.log(imgName);
+      await dbx.filesUpload({
+        path: `/${imgName}`,
+        contents: bufferImage
+      });
+      const sharedLinkObj = await dbx.sharingCreateSharedLinkWithSettings({ 
+        path: `/${imgName}`,
+      });
+      const ShareableLink= sharedLinkObj.result.url;
+      resolve(ShareableLink);
+    }catch(err){
+      if(err.status===409 && err.error.error['.tag']==='shared_link_already_exists'){
+      const ShareableLink= err.error.error.shared_link_already_exists.metadata.url;
         resolve(ShareableLink);
-      }catch(err){
-        if(err.status===409 && err.error.error['.tag']==='shared_link_already_exists'){
-          resolve(err.error.error.shared_link_already_exists.metadata.url);
-        }else{
-          console.log(err);
-          reject(err);
-        }
+      }else{
+        console.log(err);
+        reject(err);
       }
-    });
+    }
   });
 }
 
@@ -69,14 +50,10 @@ router.get('/info', async (req, res)=>{
       const imgPrivateLink= data.contents[0].thumbnail;
       const views= data.contents[0].views;
       const {likes, caption, commentCount}= data;
-
-      const imgDwnld= await download.image({ url: imgPrivateLink, dest: './backend_img' });
-      const imgName= imgDwnld.filename.replace('backend_img\\','');
       
-      let imgPublicLink= await UploadToDbx(imgName);
+      let imgPublicLink= await UploadToDbx(imgPrivateLink);
       imgPublicLink= imgPublicLink.replace("?dl=0","?raw=1");
 
-      fs.unlinkSync(`./backend_img/${imgName}`);
       res.status(200).json({caption, videoLink, imgPublicLink, views, likes, commentCount});
     }
     catch(err){
