@@ -7,18 +7,12 @@ const cheerio = require('cheerio');
 const { parse } = require("node-html-parser");
 
 const getInfo = async (url) => {
-  const html = await axios.get(url,{
-    headers:{'User-Agent':'Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36'}
-  });
+  const html = await axios.get(url);
   const root = parse(html.data);
   // console.log(html);
-  
-
   let caption2=root.querySelector('.Caption')?.text;
   console.log(caption2);
-
   return html;
-
   // const $ = cheerio.load(html.data);
   // const videoString = $("meta[property='og:video']").attr("content");
   // const imgString = $("meta[property='og:image']").attr("content");
@@ -29,13 +23,34 @@ const getInfo = async (url) => {
 router.get('/info', async (req, res)=>{
     try{
         let url = req.query.url;
-        // url= url.replace('?utm_medium=copy_link','');
-        const data = await getInfo(url);
-        console.log(data);
+        url= url.replace('?utm_medium=copy_link','');
+        const https = require('https');
+        const getContentLength= (url)=>{
+            return new Promise(((resolve, reject) => {
+                const request = https.request(url, (response) => {
+                    response.setEncoding('utf8');
+                    response.on('data', (d)=>{
+                      console.log(d);
+                      const clen= response.headers['content-length'];
+                      resolve(JSON.parse(clen));
+                    })
 
+                    response.on('error', (error) => {
+                        throw error;
+                    });
+                });
+                request.end();
+            }))
+        }
+        const r= await getContentLength(url);
+        // console.log(r);
+
+        // const data = await getInfo(url);
+        // console.log(data);
+        
         res.json("ok");
     }catch(err){
-        console.log(err.message);
+        console.log(err);
         res.status(404).send(err.message);
     }
 });
