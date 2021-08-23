@@ -77,7 +77,7 @@ router.get('/test', async (req, res)=>{
     url= url.replace('?utm_medium=copy_link','');
     const links = await instagramGetUrl(url);
     const videoLink= links.url_list[0];
-    // console.log(videoLink)
+    console.log('--------------',videoLink,'-------------------')
     res.status(200).json({videoLink});
   }
   catch(err){
