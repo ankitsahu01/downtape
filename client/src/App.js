@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 // import HomePage from './components/HomePage';
 import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
 import InstagramVideosDownloader from './components/InstagramVideosDownloader';
+import Test from './components/Test';
 
 const App=()=>{
   return(
@@ -18,6 +19,9 @@ const App=()=>{
       </Route>
       <Route path="/instagram-video-downloader">
         <InstagramVideosDownloader/>
+      </Route>
+      <Route path="/test">
+        <Test/>
       </Route>
     </Switch>
     </>

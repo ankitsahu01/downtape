@@ -69,4 +69,22 @@ router.get('/info', async (req, res)=>{
     }
 });
 
+
+const instagramGetUrl = require("instagram-url-direct")
+router.get('/test', async (req, res)=>{
+  try{
+    let url = req.query.url;
+    url= url.replace('?utm_medium=copy_link','');
+    const links = await instagramGetUrl(url);
+    const videoLink= links.url_list[0];
+    // console.log(videoLink)
+    res.status(200).json({videoLink});
+  }
+  catch(err){
+    console.log(err);
+    res.status(404).json(err);
+  }
+});
+
+
 module.exports = router;
