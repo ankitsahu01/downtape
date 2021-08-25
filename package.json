@@ -16,7 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fbdl-core": "^1.0.2",
-    "node-fb-login": "^1.0.0",
+    "got": "^11.8.2",
     "nodemon": "^2.0.12",
     "scraper-instagram": "^1.0.17",
     "ytdl-core": "^4.9.1"

@@ -2,25 +2,16 @@ const express = require('express');
 const router = express.Router();
 const fbdl = require("fbdl-core");
 
-const nodeFbLogin = require('node-fb-login');
+const got = require('got');
 
 router.get('/', async (req, res)=>{
     try{
         // const {url}= req.query;
-        nodeFbLogin.generateAuthURL({
-            fbAppID: "401349464841869",
-            redirectURI: "downtape.herokuapp.com",
-            scopes:["public_profile","email"]
-        }).then(URL=>{
-            console.log(URL);
-            const url = "https://www.facebook.com/zeemusiccompany/videos/531377684265559";
-            fbdl.getInfo(url).then((data)=>{
-                console.log(data);
-                res.status(200).json(data);
-            })
-        }).catch(error=>{
-            console.log(error);
-        })
+       
+        const url = "https://www.facebook.com/zeemusiccompany/videos/531377684265559";
+        const response = await got(url);
+		// console.log(response.body);
+        res.status(200).json(response.body);
     }catch(err){
         res.status(404).json({error:err.message});
         console.log({error:err.message});
