@@ -5,16 +5,12 @@ const fbdl = require("fbdl-core");
 router.get('/getInfo', async (req, res)=>{
   try{
     const {url}= req.query;
-    fbdl.getInfo(url)
-    .then((data)=>{
-        console.log(data);
-        res.status(200).json({data});
-    }).catch((err)=>{
-        res.status(200).json("testing123");
-    })
+    const result= await fbdl.getInfo(url);
+    console.log(result);
+    res.status(200).json({result});
   }catch(err){
-    console.log(err);
-     res.status(404).json({err})
+    res.status(404).json({error:err.message});
+    console.log({error:err.message});
   }
 });
 
