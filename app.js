@@ -18,10 +18,5 @@ if(process.env.NODE_ENV==="production"){
     });
 }
 
-const facebookGetLink = require('facebook-video-link');
-facebookGetLink("https://www.facebook.com/zeemusiccompany/videos/531377684265559").then(response => {
-    console.log(response)
-})
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT,()=>console.log(`Server running on port ${PORT}`));
