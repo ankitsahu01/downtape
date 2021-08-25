@@ -8,7 +8,8 @@ app.use(cors());
 
 app.use('/api/youtube', require('./routers/YoutubeRoutes'));
 app.use('/api/insta', require('./routers/InstaRoutes'));
-app.use('/img', express.static(path.join('backend_img')));
+app.use('/api/fb', require('./routers/FbRoutes'));
+
 
 if(process.env.NODE_ENV==="production"){
     app.use(express.static(path.resolve(__dirname,'client','build')));

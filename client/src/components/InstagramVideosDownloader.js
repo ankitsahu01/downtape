@@ -3,13 +3,8 @@ import {Helmet} from "react-helmet";
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, Grid} from '@material-ui/core';
 import {Button, TextField, Typography} from '@material-ui/core';
-import {ImageList, ImageListItem, ImageListItemBar} from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Fab from '@material-ui/core/Fab';
-import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -55,69 +50,26 @@ const useStyles = makeStyles((theme) => ({
 const InstagramVideosDownloader = () => {
   const [url, setUrl]= useState('');
   const [toggleLoader, setToggleLoader]= useState({ 'display':'none' });
-  const [data, setData]= useState({
-    caption: '',
-    videoLink: '',
-    imgPublicLink: '',
-    views: '',
-    likes: '',
-    commentCount: ''
-  });
   const classes = useStyles();
 
   const searchVideo= async (e)=>{
     try{
       e.preventDefault();
       setToggleLoader({ 'display':'block' });
-      const res= await axios(`/api/insta/info?url=${url}`);
-      let {caption, videoLink, imgPublicLink, views, likes, commentCount}= res.data;
-      setData({caption, videoLink, imgPublicLink, views, likes, commentCount});
+      const res= await axios(`/api/insta/download?url=${url}`);
+      const {downloadLink}= res.data;
+      let a = document.createElement('a');
+      a.href=downloadLink;
+      a.target="_blank";
+      document.body.appendChild(a);
       setToggleLoader({ 'display':'none' });
+      a.click();
+      a.remove();
     }catch(err){
       setToggleLoader({ 'display':'none' });
       toast.error("Something Went Wrong. Try Later!");
       console.log(err);
     }
-  }
-
-  const ShowVideoDetailsContainer=()=>{
-    if(data.videoLink===''){return ''}
-    return(
-        <>
-        <Container component="main" maxWidth="md">
-        <div className={classes.videoDetailsContainer}>
-            <Grid container spacing={1}>
-                <Grid item xs={12} sm={6}>
-                    <ImageList>
-                        <ImageListItem style={{'width':'100%'}}>
-                            <img src={data.imgPublicLink} alt={data.caption} />
-                            <ImageListItemBar title={data.caption} subtitle={<div className={classes.seticons} >
-                                <span className={classes.alignicons}><VisibilityIcon />{data.views}</span>
-                                <span className={classes.alignicons}><FavoriteIcon/>{data.likes}</span>
-                                <span className={classes.alignicons}><ChatBubbleIcon/>{data.commentCount}</span>
-                            </div>} />
-                        </ImageListItem>
-                    </ImageList>
-                </Grid>
-                <Grid item xs={12} sm={6} className={classes.downloadSection}>
-                    <Fab
-                    variant="extended"
-                    size="small"
-                    color="secondary"
-                    aria-label="download"
-                    href={data.videoLink}
-                    target="_blank"
-                    className={classes.btn}
-                    >
-                    <GetAppRoundedIcon className={classes.extendedIcon} />
-                    Download
-                    </Fab>
-                </Grid>
-            </Grid>
-        </div>
-        </Container>
-        </>
-    );
   }
 
   return (
@@ -158,14 +110,14 @@ const InstagramVideosDownloader = () => {
                         color="primary"
                         className={classes.btn}
                         >
-                        Get Video
+                        <GetAppIcon style={{"marginRight":"4px"}}/>
+                        Download
                         </Button>
                     </Grid>
                 </Grid>
                 </form>
             </div>
         </Container>
-        <ShowVideoDetailsContainer/>
         <ToastContainer position="top-center" />
     </>
   );

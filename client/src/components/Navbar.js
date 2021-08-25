@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {Fab, Slide} from '@material-ui/core';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import InstagramIcon from '@material-ui/icons/Instagram';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,10 +70,10 @@ const Navbar=(props)=> {
               <NavLink to="/" className={classes.navlink} >DOWNTAPE</NavLink>            
             </Typography>
             <Button color="inherit">
-              <NavLink to="/youtube-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink} >Download Youtube Video</NavLink>
+              <NavLink to="/youtube-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink}><YouTubeIcon/></NavLink>
             </Button>
             <Button color="inherit">
-              <NavLink to="/instagram-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink} >Download Instagram Video</NavLink>
+              <NavLink to="/instagram-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink}><InstagramIcon/></NavLink>
             </Button>
           </Toolbar>
         </AppBar>

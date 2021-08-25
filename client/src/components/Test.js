@@ -3,13 +3,8 @@ import {Helmet} from "react-helmet";
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, Grid} from '@material-ui/core';
 import {Button, TextField, Typography} from '@material-ui/core';
-import {ImageList, ImageListItem, ImageListItemBar} from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Fab from '@material-ui/core/Fab';
-import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -55,22 +50,18 @@ const useStyles = makeStyles((theme) => ({
 const Test = () => {
   const [url, setUrl]= useState('');
   const [toggleLoader, setToggleLoader]= useState({ 'display':'none' });
+  const [data, setData]= useState({'hd':'', 'sd':'', 'thumb':'', 'title':''});
   const classes = useStyles();
 
   const searchVideo= async (e)=>{
     try{
       e.preventDefault();
       setToggleLoader({ 'display':'block' });
-      const res= await axios(`/api/insta/test?url=${url}`);
-      const {videoLink}= res.data;
-      let a = document.createElement('a');
-      a.href=videoLink;
-      a.target="_blank";
-      console.log(videoLink);
-      document.body.appendChild(a);
+      const res= await axios(`/api/fb/getInfo?url=${url}`);
+      console.log(res.data);
       setToggleLoader({ 'display':'none' });
-      a.click();
-      a.remove();
+      const {hd, sd, thumb, title}= res.data;
+      setData({hd, sd, thumb, title});
     }catch(err){
       setToggleLoader({ 'display':'none' });
       toast.error("Something Went Wrong. Try Later!");
@@ -81,15 +72,12 @@ const Test = () => {
   return (
     <>
       <Helmet>
-            <title>Test Instagram Videos Downloader - DOWNTAPE Free Instagram Downloader Online</title>
-            {/* <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
-            <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
-            <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" /> */}
+            <title>FB Videos Downloader - DOWNTAPE Free FB Downloader Online</title>
         </Helmet>
         <Container component="main" maxWidth="md">
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
-                Instagram Video Downloader
+                FB Video Downloader
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
                 <Grid container spacing={1}>
@@ -102,7 +90,7 @@ const Test = () => {
                         autoFocus
                         required
                         label="Enter Link"
-                        placeholder="e.g. https://www.instagram.com/p/CB5d063pwo-/"
+                        placeholder="e.g. https://www.facebook.com/zeemusiccompany/videos/531377684265559"
                         value={url}
                         onChange={(e)=>setUrl(e.target.value)}
                         />
@@ -116,6 +104,7 @@ const Test = () => {
                         color="primary"
                         className={classes.btn}
                         >
+                        <GetAppIcon style={{"marginRight":"4px"}}/>
                         Download
                         </Button>
                     </Grid>
@@ -123,6 +112,21 @@ const Test = () => {
                 </form>
             </div>
         </Container>
+
+        {
+          data.hd ? 
+          <>
+            <p>{data.title}</p>
+            {/* <video controls>
+              <source src={data.hd} />
+            </video> */}
+            <video controls>
+              <source src={data.sd} poster={data.sd} />
+            </video>
+          </>
+          : ''
+        }
+
         <ToastContainer position="top-center" />
     </>
   );
