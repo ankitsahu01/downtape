@@ -6,7 +6,7 @@ router.get('/getInfo', async (req, res)=>{
   try{
     const {url}= req.query;
     const data= await fbvd.getInfo(url);
-    // console.log(data);
+    console.log(data);
     const {hd, sd}= data.download;
     const {thumb, title}= data;
     res.status(200).json({hd, sd, thumb, title});
