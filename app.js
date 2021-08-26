@@ -8,7 +8,7 @@ app.use(cors());
 
 app.use('/api/youtube', require('./routers/YoutubeRoutes'));
 app.use('/api/insta', require('./routers/InstaRoutes'));
-app.use('/api/fb', require('./routers/FbRoutes'));
+app.use('/api/twitter', require('./routers/TwitterRoutes'));
 
 
 if(process.env.NODE_ENV==="production"){
