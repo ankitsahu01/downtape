@@ -6,11 +6,11 @@ const puppeteer = require('puppeteer');
 
 router.get('/', async (req, res)=>{
     try{
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setViewport({ width: 1024, height: 480 });
 
-        await page.goto('https://www.facebook.com/zeemusiccompany/videos/531377684265559', {'timeout': 10000, 'waitUntil':'load'});
+        await page.goto('https://www.facebook.com/zeemusiccompany/videos/531377684265559', { 'waitUntil':'load'});
         
         const data = await page.content();
         await browser.close();
