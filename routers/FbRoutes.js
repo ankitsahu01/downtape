@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.get('/', async (req, res)=>{
     try{
-
         // const {url}= req.query;
         // const url = "https://www.facebook.com/zeemusiccompany/videos/531377684265559";
         // const response = await fbdl.getInfo(url);
