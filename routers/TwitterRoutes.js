@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const twitterGetUrl = require("twitter-url-direct")
+const twitterGetUrl = require("twitter-url-direct");
 
 router.get('/', async (req, res)=>{
     try{
