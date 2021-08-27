@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const contentDisposition = require('content-disposition');
 const ytdl = require('ytdl-core');
 
 const https = require('https');
@@ -55,7 +56,7 @@ router.get('/download', (req, res)=>{
         }else if( !ytdl.validateURL(url) ){
             return res.status(404).send("Not a valid YouTube URL");    
         }
-        res.header("Content-Disposition", `attachment; filename="${title}.mp4"` );
+        res.header("Content-Disposition", contentDisposition(title+'.mp4'));
         res.header('Content-Type', 'video/mp4');
         if(clen!=0){
             res.header('Content-Length', clen);

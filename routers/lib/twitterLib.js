@@ -75,7 +75,7 @@ exports.getInfo = (url, options, callback) => {
                                 variants: info['globalObjects']['tweets'][id]['extended_entities']['media'][0]['video_info']['variants']
                             });
                         } catch (err) {
-                            return callback(new Error("Unable to fetch data from this URL!"));
+                            return callback(new Error("Unable to fetch video from this URL!"));
                         }
                     }
                 });
@@ -99,7 +99,7 @@ function req(opt, options, callback) {
             if (response.statusCode == 200 && body) {
                 callback(null, body);
             } else {
-                callback(new Error('twitter API error'));
+                callback(new Error('twitter API error'));
             }
         }
     });

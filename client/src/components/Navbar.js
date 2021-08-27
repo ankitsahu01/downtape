@@ -7,6 +7,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {Fab, Slide} from '@material-ui/core';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +75,9 @@ const Navbar=(props)=> {
             </Button>
             <Button color="inherit">
               <NavLink to="/instagram-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink}><InstagramIcon/></NavLink>
+            </Button>
+            <Button color="inherit">
+              <NavLink to="/twitter-video-downloader" className={classes.navlink} activeClassName={classes.activeNavLink}><TwitterIcon/></NavLink>
             </Button>
           </Toolbar>
         </AppBar>
