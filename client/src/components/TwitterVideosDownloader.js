@@ -128,7 +128,7 @@ const TwitterVideosDownloader=()=> {
         e.preventDefault();
         // console.log(video.toDownload.itag);
         if(process.env.NODE_ENV==="production"){
-            window.location.href=`${window.location.href}api/twitter/download?url=${video.toDownload.url}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
+            window.location.href=`${window.location.origin}/api/twitter/download?url=${video.toDownload.url}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
         }else{
             window.location.href=`http://localhost:5000/api/twitter/download?url=${video.toDownload.url}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
         }

@@ -62,17 +62,4 @@ router.get('/download',(req, res)=>{
     });
 });
 
-const { unfurl } = require('unfurl.js');
-router.get('/test', async(req, res)=>{
-    const {url}= req.query;
-    try {
-        const result = await unfurl(url);
-        console.log(result)
-        res.status(200).json(result);
-    } catch (error) {
-        console.log(error);
-        res.status(404).json(err.message);
-    }
-});
-
 module.exports = router;
