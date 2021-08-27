@@ -72,12 +72,12 @@ const Test = () => {
   return (
     <>
       <Helmet>
-            <title>FB Videos Downloader - DOWNTAPE Free FB Downloader Online</title>
+            <title>Twitter Videos Downloader - DOWNTAPE Free Twitter Downloader Online</title>
         </Helmet>
         <Container component="main" maxWidth="md">
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
-                FB Video Downloader
+                Twitter Video Downloader
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
                 <Grid container spacing={1}>
@@ -90,7 +90,7 @@ const Test = () => {
                         autoFocus
                         required
                         label="Enter Link"
-                        placeholder="e.g. https://www.facebook.com/zeemusiccompany/videos/531377684265559"
+                        placeholder="e.g. https://twitter.com/i/status/1430466398069743617"
                         value={url}
                         onChange={(e)=>setUrl(e.target.value)}
                         />
