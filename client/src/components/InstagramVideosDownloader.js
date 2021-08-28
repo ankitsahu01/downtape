@@ -64,13 +64,7 @@ const InstagramVideosDownloader = () => {
       }else{
           window.location.href=`http://localhost:5000/api/insta/download?url=${downloadLink}`;
       }
-      // let a = document.createElement('a');
-      // a.href=downloadLink;
-      // a.target="_blank";
-      // document.body.appendChild(a);
       setToggleLoader({ 'display':'none' });
-      // a.click();
-      // a.remove();
     }catch(err){
       setToggleLoader({ 'display':'none' });
       toast.error("Something Went Wrong. Try Later!");
