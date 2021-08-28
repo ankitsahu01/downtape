@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
 import InstagramVideosDownloader from './components/InstagramVideosDownloader';
 import TwitterVideosDownloader from './components/TwitterVideosDownloader';
+import VimeoVideosDownloader from './components/VimeoVideosDownloader';
 import Test from './components/Test';
 
 const App=()=>{
@@ -23,6 +24,9 @@ const App=()=>{
       </Route>
       <Route path="/twitter-video-downloader">
         <TwitterVideosDownloader/>
+      </Route>
+      <Route path="/vimeo-video-downloader">
+        <VimeoVideosDownloader/>
       </Route>
       <Route path="/test">
         <Test/>

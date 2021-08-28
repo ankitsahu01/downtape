@@ -58,8 +58,13 @@ router.get('/info', async (req, res)=>{
 
         info.formats= await Promise.all(info.formats.map( async (format)=>{
             return{
-                ...format,
-                'contentLength': await getContentLength(format.url)
+                'contentLength': await getContentLength(format.url),
+                'quality': format.quality,
+                'url': format.url,
+                'width': format.width,
+                'height': format.height,
+                'type': format.mime,
+                'fps': format.fps,
             }
         }));
 
@@ -77,7 +82,9 @@ router.get('/info', async (req, res)=>{
 });
 
 router.get('/download',(req, res)=>{
-    const {url, clen, title}= req.query;
+    let {url, clen, title}= req.query;
+    url= url.replace(/\*\//g, '%2A%2F');
+    url= url.replace(/\*/g, '%2A');
     https.get(url, (stream) => {
         res.header("Content-Disposition", contentDisposition(title+'.mp4'));
         res.header('Content-Type', 'video/mp4');

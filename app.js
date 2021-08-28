@@ -9,7 +9,7 @@ app.use(cors());
 app.use('/api/youtube', require('./routers/YoutubeRoutes'));
 app.use('/api/insta', require('./routers/InstaRoutes'));
 app.use('/api/twitter', require('./routers/TwitterRoutes'));
-app.use('/api/test', require('./routers/TestRoutes'));
+app.use('/api/vimeo', require('./routers/VimeoRoutes'));
 
 
 if(process.env.NODE_ENV==="production"){
