@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
 import InstagramVideosDownloader from './components/InstagramVideosDownloader';
 import TwitterVideosDownloader from './components/TwitterVideosDownloader';
+import Test from './components/Test';
 
 const App=()=>{
   return(
@@ -22,6 +23,9 @@ const App=()=>{
       </Route>
       <Route path="/twitter-video-downloader">
         <TwitterVideosDownloader/>
+      </Route>
+      <Route path="/test">
+        <Test/>
       </Route>
     </Switch>
     </>
