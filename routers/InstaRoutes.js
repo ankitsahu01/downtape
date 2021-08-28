@@ -3,7 +3,7 @@ const router = express.Router();
 const Insta = require('scraper-instagram');
 const InstaClient = new Insta();
 
-router.get('/download', async (req, res)=>{
+router.get('/getLink', async (req, res)=>{
   try{
     let url = req.query.url;
       url= url.replace('?utm_medium=copy_link','');
@@ -28,5 +28,18 @@ router.get('/download', async (req, res)=>{
   }
 });
 
+const {request} = require('gaxios');
+router.get('/download', async (req, res)=>{
+  const {url}= req.query;
+  const title= "DownTape_"+Date.now()
+  const result = await request({
+    url, responseType: "stream"
+  });
+  const clen= result.headers['content-length'];
+  res.header("Content-Disposition", `attachment; filename="${title}.mp4"`);
+  res.header('Content-Type', 'video/mp4');
+  res.header('Content-Length', clen);
+  result.data.pipe(res);
+});
 
 module.exports = router;

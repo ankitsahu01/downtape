@@ -56,15 +56,21 @@ const InstagramVideosDownloader = () => {
     try{
       e.preventDefault();
       setToggleLoader({ 'display':'block' });
-      const res= await axios(`/api/insta/download?url=${url}`);
-      const {downloadLink}= res.data;
-      let a = document.createElement('a');
-      a.href=downloadLink;
-      a.target="_blank";
-      document.body.appendChild(a);
+      const res= await axios(`/api/insta/getLink?url=${url}`);
+      let {downloadLink}= res.data;
+      downloadLink= encodeURIComponent(downloadLink);
+      if(process.env.NODE_ENV==="production"){
+        window.location.href=`${window.location.origin}/api/insta/download?url=${downloadLink}`;
+      }else{
+          window.location.href=`http://localhost:5000/api/insta/download?url=${downloadLink}`;
+      }
+      // let a = document.createElement('a');
+      // a.href=downloadLink;
+      // a.target="_blank";
+      // document.body.appendChild(a);
       setToggleLoader({ 'display':'none' });
-      a.click();
-      a.remove();
+      // a.click();
+      // a.remove();
     }catch(err){
       setToggleLoader({ 'display':'none' });
       toast.error("Something Went Wrong. Try Later!");
