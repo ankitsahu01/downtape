@@ -1,5 +1,5 @@
 import React,{ useState } from 'react';
-import {Helmet} from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, Grid} from '@material-ui/core';
 import {Button, TextField, Typography} from '@material-ui/core';
@@ -55,6 +55,10 @@ const InstagramVideosDownloader = () => {
   const searchVideo= async (e)=>{
     try{
       e.preventDefault();
+      if(url === ""){
+        toast.error("Please Enter Link!");
+        return;
+      }
       setToggleLoader({ 'display':'block' });
       const res= await axios(`/api/insta/getLink?url=${url}`);
       let {downloadLink}= res.data;
@@ -74,12 +78,14 @@ const InstagramVideosDownloader = () => {
 
   return (
     <>
-      <Helmet>
-            <title>Instagram Videos Downloader - DOWNTAPE Free Instagram Downloader Online</title>
-            {/* <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
-            <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
-            <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" /> */}
+      <HelmetProvider>
+        <Helmet prioritizeSeoTags>
+          <title>Instagram Videos Downloader - DOWNTAPE Free Instagram Downloader Online</title>
+          {/* <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
+          <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
+          <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" /> */}
         </Helmet>
+      </HelmetProvider>
         <Container component="main" maxWidth="md">
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">

@@ -23,6 +23,7 @@
     "nodemon": "^2.0.12",
     "request": "^2.88.2",
     "scraper-instagram": "^1.0.17",
+    "soundcloud-downloader": "^1.0.0",
     "ytdl-core": "^4.9.1"
   }
 }

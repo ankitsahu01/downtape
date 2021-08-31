@@ -5,7 +5,7 @@ import { createTheme } from '@material-ui/core/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#1976d2',
     },
     success:{
       main: '#4caf50',
@@ -16,9 +16,16 @@ const theme = createTheme({
     light: {
       main: '#FFFFFF',
     },
+    dark: {
+      main: '#212121',
+    },
     youtube:{
       main: '#FF0000'
-    }
+    },
+    gradientBg:{
+      main: 'linear-gradient( 135deg, #1976d2 10%, #0396FF 100%)',
+      light: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% )',
+    },
   },
 });
 

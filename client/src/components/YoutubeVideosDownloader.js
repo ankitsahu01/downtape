@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react';
-import {Helmet} from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, Grid} from '@material-ui/core';
 import {Button, TextField, Typography} from '@material-ui/core';
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         display:'flex',
         flexDirection:'column',
         justifyContent:'center'
-    }
+    },
 }));
 
 const YoutubeVideosDownloader=()=> {
@@ -50,6 +50,10 @@ const YoutubeVideosDownloader=()=> {
     const searchVideo = async (e)=>{
         try{
             e.preventDefault();
+            if(video.url === ""){
+                toast.error("Please Enter Link!");
+                return;
+            }
             dispatch( {type:"toggleLoader", payload:{'display':'block'}} );
             const res= await axios.get(`/api/youtube/info?url=${video.url.trim()}`);
             dispatch( {type:"toggleLoader", payload:{'display':'none'}} );
@@ -139,12 +143,14 @@ const YoutubeVideosDownloader=()=> {
     }
     return (
         <>
-        <Helmet>
-            <title>YouTube Videos Downloader - DOWNTAPE Free YouTube Downloader Online</title>
-            <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
-            <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
-            <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" />
-        </Helmet>
+        <HelmetProvider>
+            <Helmet prioritizeSeoTags>
+                <title>YouTube Videos Downloader - DOWNTAPE Free YouTube Downloader Online</title>
+                <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
+                <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
+                {/* <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" /> */}
+            </Helmet>
+        </HelmetProvider>
         <Container component="main" maxWidth="md">
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
@@ -152,7 +158,7 @@ const YoutubeVideosDownloader=()=> {
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
                 <Grid container spacing={1}>
-                    <Grid item xs={12} sm={10}>
+                    <Grid item xs={12} md={9}>
                         <TextField
                         type="text"
                         variant="outlined"
@@ -167,7 +173,7 @@ const YoutubeVideosDownloader=()=> {
                         />
                          <LinearProgress style={video.toggleLoader} />
                     </Grid>
-                    <Grid item xs={12} sm={2}>
+                    <Grid item xs={12} md={2}>
                         <Button
                         type="submit"
                         fullWidth
