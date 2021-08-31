@@ -11,8 +11,8 @@ import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { initialVideo, reducer } from '../reducers/YoutubeReducer';
-import { sToTime, bytesToMb } from './Converters';
+import { initialVideo, reducer } from '../../reducers/TwitterReducer';
+import { sToTime, bytesToMb } from '../Converters';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -40,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
         display:'flex',
         flexDirection:'column',
         justifyContent:'center'
-    },
+    }
 }));
 
-const YoutubeVideosDownloader=()=> {
+const TwitterVideosDownloader=()=> {
     const [video, dispatch] = useReducer(reducer, initialVideo);
     const classes = useStyles();
 
@@ -55,18 +55,14 @@ const YoutubeVideosDownloader=()=> {
                 return;
             }
             dispatch( {type:"toggleLoader", payload:{'display':'block'}} );
-            const res= await axios.get(`/api/youtube/info?url=${video.url.trim()}`);
+            const res= await axios.get(`/api/twitter/info?url=${video.url.trim()}`);
             dispatch( {type:"toggleLoader", payload:{'display':'none'}} );
             const data= res.data;
             // console.log(data);
-            let {title, thumbnail, lengthSeconds} = data;
-            dispatch( {type:"details", payload:{title, thumbnail, duration:sToTime(lengthSeconds)}} );
-            const formats = data.formats.filter(format=>{
-                return format.hasVideo && format.hasAudio
-            });
-            // console.log(formats);
+            let {title, thumbnail, duration_ms, formats} = data;
+            dispatch( {type:"details", payload:{title, thumbnail, duration:sToTime(duration_ms/1000)}} );
             dispatch( {type:"formats", payload:formats} );
-            dispatch( { type:"toDownload", payload:{ 'itag':formats[0].itag } } );
+            dispatch( { type:"toDownload", payload:{ 'url':formats[0].url } } );
         }catch(err){
             dispatch( {type:"toggleLoader", payload:{'display':'none'}} );
             if(err.response.status===404){
@@ -98,15 +94,15 @@ const YoutubeVideosDownloader=()=> {
                             <InputLabel htmlFor="quality-dropdown">Video Quality</InputLabel>
                             <Select
                             labelId="quality-dropdown"
-                            value={video.toDownload.itag}
+                            value={video.toDownload.url}
                             label="Video Quality"
-                            onChange={e=>dispatch({ type:'toDownload', payload:{'itag':e.target.value} })}
+                            onChange={e=>dispatch({ type:'toDownload', payload:{'url':e.target.value} })}
                             >
                             {
                                 video.formats.map((format, index)=>{
                                     return(
-                                        <MenuItem key={index} value={format.itag}>
-                                            {format.qualityLabel} {format.contentLength ? ` - ${bytesToMb(format.contentLength)} Mb` : ''}
+                                        <MenuItem key={index} value={format.url}>
+                                            {format.contentLength ? ` ${bytesToMb(format.contentLength)} Mb` : ''} &nbsp;&nbsp; {format.quality} 
                                         </MenuItem>
                                     )
                                 })
@@ -134,31 +130,30 @@ const YoutubeVideosDownloader=()=> {
 
     const downloadVideo = async (e)=>{
         e.preventDefault();
-        // console.log(video.toDownload.itag);
         if(process.env.NODE_ENV==="production"){
-            window.location.href=`${window.location.origin}/api/youtube/download?url=${video.url}&itag=${video.toDownload.itag}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
+            window.location.href=`${window.location.origin}/api/twitter/download?url=${video.toDownload.url}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
         }else{
-            window.location.href=`http://localhost:5000/api/youtube/download?url=${video.url}&itag=${video.toDownload.itag}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
+            window.location.href=`http://localhost:5000/api/twitter/download?url=${video.toDownload.url}&clen=${video.toDownload.contentLength}&title=${video.details.title}`;
         }
     }
     return (
         <>
         <HelmetProvider>
             <Helmet prioritizeSeoTags>
-                <title>YouTube Videos Downloader - DOWNTAPE Free YouTube Downloader Online</title>
-                <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
+                <title>Twitter Videos Downloader - DOWNTAPE Free Twitter Downloader Online</title>
+                {/* <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
                 <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
-                {/* <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" /> */}
+                <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" /> */}
             </Helmet>
         </HelmetProvider>
         <Container component="main" maxWidth="md">
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
-                YouTube Video Downloader
+                Twitter Video Downloader
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
                 <Grid container spacing={1}>
-                    <Grid item xs={12} md={9}>
+                    <Grid item xs={12} sm={10}>
                         <TextField
                         type="text"
                         variant="outlined"
@@ -167,13 +162,13 @@ const YoutubeVideosDownloader=()=> {
                         autoFocus
                         required
                         label="Enter Link"
-                        placeholder="e.g. https://www.youtube.com/watch?v=wAD9uO9YAQw"
+                        placeholder="e.g. https://twitter.com/i/status/1430466398069743617"
                         value={video.url}
                         onChange={(e)=>dispatch({type:"url", payload:e.target.value})}
                         />
                          <LinearProgress style={video.toggleLoader} />
                     </Grid>
-                    <Grid item xs={12} md={2}>
+                    <Grid item xs={12} sm={2}>
                         <Button
                         type="submit"
                         fullWidth
@@ -194,4 +189,4 @@ const YoutubeVideosDownloader=()=> {
     );
 }
 
-export default YoutubeVideosDownloader;
+export default TwitterVideosDownloader;

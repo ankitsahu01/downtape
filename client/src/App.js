@@ -1,39 +1,40 @@
-import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
-import Navbar from './components/Navbar';
-// import HomePage from './components/HomePage';
-import YoutubeVideosDownloader from './components/YoutubeVideosDownloader';
-import InstagramVideosDownloader from './components/InstagramVideosDownloader';
-import TwitterVideosDownloader from './components/TwitterVideosDownloader';
-import VimeoVideosDownloader from './components/VimeoVideosDownloader';
-import Test from './components/Test';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import Navbar from "./components/Navbar";
+// import HomePage from './components/pages/HomePage';
+import YoutubeVideosDownloader from "./components/pages/YoutubeVideosDownloader";
+import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
+import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
+import VimeoVideosDownloader from "./components/pages/VimeoVideosDownloader";
+import Test from "./components/pages/Test";
+import CustomSwitch from "./components/CustomSwitch";
 
-const App=()=>{
-  return(
+const App = () => {
+  return (
     <>
-    <Navbar/>
-    <Switch>
-      <Route path="/" exact>
-        <Redirect to="/youtube-video-downloader" />
-      </Route>
-      <Route path="/youtube-video-downloader" >
-        <YoutubeVideosDownloader/>
-      </Route>
-      <Route path="/instagram-video-downloader">
-        <InstagramVideosDownloader/>
-      </Route>
-      <Route path="/twitter-video-downloader">
-        <TwitterVideosDownloader/>
-      </Route>
-      <Route path="/vimeo-video-downloader">
-        <VimeoVideosDownloader/>
-      </Route>
-      <Route path="/test">
-        <Test/>
-      </Route>
-    </Switch>
+      <Navbar />
+      <CustomSwitch>
+        <Route path="/" exact>
+          <Redirect to="/youtube-video-downloader" />
+        </Route>
+        <Route path="/youtube-video-downloader">
+          <YoutubeVideosDownloader />
+        </Route>
+        <Route path="/instagram-video-downloader">
+          <InstagramVideosDownloader />
+        </Route>
+        <Route path="/twitter-video-downloader">
+          <TwitterVideosDownloader />
+        </Route>
+        <Route path="/vimeo-video-downloader">
+          <VimeoVideosDownloader />
+        </Route>
+        <Route path="/test">
+          <Test />
+        </Route>
+      </CustomSwitch>
     </>
-  )
-}
+  );
+};
 
 export default App;

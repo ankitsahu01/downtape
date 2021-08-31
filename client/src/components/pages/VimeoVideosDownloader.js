@@ -11,8 +11,8 @@ import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { initialVideo, reducer } from '../reducers/VimeoReducer';
-import { sToTime, bytesToMb } from './Converters';
+import { initialVideo, reducer } from '../../reducers/VimeoReducer';
+import { sToTime, bytesToMb } from '../Converters';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
