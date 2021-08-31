@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-var expressStaticGzip = require("express-static-gzip");
+var compression = require('compression');
 const path = require('path');
 const app = express();
 
@@ -15,11 +15,7 @@ app.use('/api/test', require('./routers/TestRoutes'));
 
 
 if(process.env.NODE_ENV==="production"){
-    app.use(
-        expressStaticGzip(path.resolve(__dirname,'client','build'), {
-            enableBrotli: true, // only if you have brotli files too
-        }),
-    );
+    app.use(compression());
     app.use(express.static(path.resolve(__dirname,'client','build')));
     app.get('/*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client','build','index.html'));
