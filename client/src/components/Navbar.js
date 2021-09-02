@@ -14,7 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  scrollTop: {
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
@@ -22,25 +22,39 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  navlink: {
+  titlelink: {
     color: theme.palette.light.main,
     textDecoration: "none",
   },
-  activeNavLink: {
-    borderBottom: `1px solid ${theme.palette.light.main}`,
-  },
-  mobileNavlink: {
-    color: theme.palette.dark.main,
+  navlink: {
+    color: theme.palette.light.main,
     textDecoration: "none",
+    borderRadius: '0',
+    padding: theme.spacing(2),
+    marginRight: theme.spacing(4),
+    '&:hover': {
+      // borderBottom: `1px solid ${theme.palette.light.main}`,
+      borderBottom: "1px solid",
+    },
   },
-  activeMobileNavLink: {
-    borderBottom: `1px solid ${theme.palette.dark.main}`,
+  MobNavlink: {
+    color: theme.palette.light.main,
+    textDecoration: "none",
+    borderRadius: '0',
+    marginTop: theme.spacing(2),
+  },
+  activeNavLink: {
+    // borderBottom: `2px solid ${theme.palette.light.main}`,
+    borderBottom: "2px solid",
+    '&:hover': {
+      borderBottom: "2px solid",
+    },
   },
   grbg:{
-    background: theme.palette.gradientBg.main,
+    background: theme.palette.navGr.main,
   },
   paper: {
-    background: theme.palette.gradientBg.main,
+    background: theme.palette.navGr.main,
   }
 }));
 
@@ -60,9 +74,9 @@ const ScrollTop=(props)=> {
   };
   return (
     <Zoom in={trigger}>
-      <div onClick={handleClick} role="presentation" className={classes.root} >
-        {children}
-      </div>
+      <Fab color="primary" onClick={handleClick} size="small" role="presentation" aria-label="scroll back to top" className={classes.scrollTop}>
+          {children}
+      </Fab>
     </Zoom>
   );
 }
@@ -104,40 +118,33 @@ const Navbar=(props)=> {
   const DesktopDisplay = ()=>{
     return (
       <>
-        <Button color="inherit">
-          <NavLink
+        <Button color="inherit" component={NavLink}
             to="/youtube-video-downloader"
             className={classes.navlink}
             activeClassName={classes.activeNavLink}
           >
-            <YouTubeIcon />
-          </NavLink>
+            <YouTubeIcon fontSize="large" />
         </Button>
-        <Button color="inherit">
-          <NavLink
+        <Button color="inherit" component={NavLink}
             to="/instagram-video-downloader"
             className={classes.navlink}
             activeClassName={classes.activeNavLink}
           >
-            <InstagramIcon />
-          </NavLink>
-        </Button>
-        <Button color="inherit">
-          <NavLink
+            <InstagramIcon fontSize="large" />
+          </Button>
+        <Button color="inherit" component={NavLink}
             to="/twitter-video-downloader"
             className={classes.navlink}
             activeClassName={classes.activeNavLink}
           >
-            <TwitterIcon />
-          </NavLink>
-        </Button>
-        <Button color="inherit">
-          <NavLink
+            <TwitterIcon fontSize="large" />
+          </Button>
+          <Button color="inherit" component={NavLink}
             to="/vimeo-video-downloader"
             className={classes.navlink}
             activeClassName={classes.activeNavLink}
           >
-            <SvgIcon>
+            <SvgIcon fontSize="large">
               <path
                 d="M17.811,2.018c2.017,0.053,3.026,1.198,3.036,3.438c0,0.147-0.005,0.3-0.013,0.457c-0.089,1.899-1.502,4.486-4.245,7.76
                   c-2.829,3.43-5.229,5.147-7.2,5.156c-1.226,0-2.244-1.05-3.061-3.151l-0.858-2.88L4.622,9.922C3.997,7.838,3.329,6.798,2.616,6.798
@@ -148,7 +155,6 @@ const Navbar=(props)=> {
                   c-0.479,0-0.99,0.102-1.537,0.299c0.98-3.021,2.864-4.534,5.65-4.544C17.655,2.018,17.732,2.018,17.811,2.018z"
               />
             </SvgIcon>
-          </NavLink>
         </Button>
       </>
     );
@@ -166,40 +172,33 @@ const Navbar=(props)=> {
         <MenuIcon />
       </IconButton>
       <Drawer anchor="right" open={openDrawer} onClose={toggleDrawer(false)} classes={{ paper: classes.paper }}>
-        <Button onClick={toggleDrawer(false)} >
-          <NavLink
+        <Button onClick={toggleDrawer(false)} component={NavLink}
             to="/youtube-video-downloader"
-            className={classes.navlink}
-            activeStyle={{borderBottom:'1px solid #ffffff'}}
+            className={classes.MobNavlink}
+            activeClassName={classes.activeNavLink}
           >
-            <YouTubeIcon />
-          </NavLink>
+            <YouTubeIcon fontSize="large" />
         </Button>
-        <Button onClick={toggleDrawer(false)} >
-          <NavLink
+        <Button onClick={toggleDrawer(false)} component={NavLink}
             to="/instagram-video-downloader"
-            className={classes.navlink}
-            activeStyle={{borderBottom:'1px solid #ffffff'}}
+            className={classes.MobNavlink}
+            activeClassName={classes.activeNavLink}
           >
-            <InstagramIcon />
-          </NavLink>
+            <InstagramIcon fontSize="large" />
         </Button>
-        <Button onClick={toggleDrawer(false)} >
-          <NavLink
+        <Button onClick={toggleDrawer(false)} component={NavLink}
             to="/twitter-video-downloader"
-            className={classes.navlink}
-            activeStyle={{borderBottom:'1px solid #ffffff'}}
+            className={classes.MobNavlink}
+            activeClassName={classes.activeNavLink}
           >
-            <TwitterIcon />
-          </NavLink>
+            <TwitterIcon fontSize="large" />
         </Button>
-        <Button onClick={toggleDrawer(false)} >
-          <NavLink
+        <Button onClick={toggleDrawer(false)} component={NavLink}
             to="/vimeo-video-downloader"
-            className={classes.navlink}
-            activeStyle={{borderBottom:'1px solid #ffffff'}}
+            className={classes.MobNavlink}
+            activeClassName={classes.activeNavLink}
           >
-            <SvgIcon>
+            <SvgIcon fontSize="large">
               <path
                 d="M17.811,2.018c2.017,0.053,3.026,1.198,3.036,3.438c0,0.147-0.005,0.3-0.013,0.457c-0.089,1.899-1.502,4.486-4.245,7.76
                 c-2.829,3.43-5.229,5.147-7.2,5.156c-1.226,0-2.244-1.05-3.061-3.151l-0.858-2.88L4.622,9.922C3.997,7.838,3.329,6.798,2.616,6.798
@@ -210,7 +209,6 @@ const Navbar=(props)=> {
                 c-0.479,0-0.99,0.102-1.537,0.299c0.98-3.021,2.864-4.534,5.65-4.544C17.655,2.018,17.732,2.018,17.811,2.018z"
               />
             </SvgIcon>
-          </NavLink>
         </Button>
       </Drawer>
     </>
@@ -223,7 +221,7 @@ const Navbar=(props)=> {
         <AppBar className={classes.grbg}>
           <Toolbar>
             <Typography variant="h6" component="h1" className={classes.title}>
-              <NavLink to="/" className={classes.navlink}>
+              <NavLink to="/" className={classes.titlelink}>
                 DOWNTAPE
               </NavLink>
             </Typography>
@@ -233,9 +231,7 @@ const Navbar=(props)=> {
       </HideOnScroll>
       <Toolbar id="back-to-top-anchor" />
       <ScrollTop {...props}>
-        <Fab color="primary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
-        </Fab>
       </ScrollTop>
     </>
   );

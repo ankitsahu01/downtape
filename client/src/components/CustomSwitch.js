@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, useLocation } from "react-router-dom";
 import TopBarProgress from "react-topbar-progress-indicator";
+
 TopBarProgress.config({
   barColors: {
       "0": "#00E500",
@@ -17,8 +18,9 @@ const CustomSwitch = ({ children }) => {
   useEffect(() => {
     setPrevLoc(location.pathname);
     setProgress(true);
+    window.scrollTo(0, 0);
     if (location.pathname === prevLoc) {
-      setPrevLoc("");
+        setPrevLoc("");
     }
   }, [location]);
 

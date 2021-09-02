@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 // import HomePage from './components/pages/HomePage';
 import YoutubeVideosDownloader from "./components/pages/YoutubeVideosDownloader";
 import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
 import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
 import VimeoVideosDownloader from "./components/pages/VimeoVideosDownloader";
+import NotFound from "./components/pages/NotFound";
 import Test from "./components/pages/Test";
 import CustomSwitch from "./components/CustomSwitch";
 
@@ -32,7 +34,9 @@ const App = () => {
         <Route path="/test">
           <Test />
         </Route>
+        <NotFound/>
       </CustomSwitch>
+      <Footer/>
     </>
   );
 };

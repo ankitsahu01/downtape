@@ -1,5 +1,5 @@
 import React,{ useState } from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, Grid} from '@material-ui/core';
 import {Button, TextField, Typography} from '@material-ui/core';
@@ -8,10 +8,11 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import InstagramTextContent from './text_contents/InstagramTextContent';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-      marginTop: theme.spacing(4),
+  searchDiv: {
+      marginTop: theme.spacing(10),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -78,17 +79,17 @@ const InstagramVideosDownloader = () => {
 
   return (
     <>
-      <HelmetProvider>
-        <Helmet prioritizeSeoTags>
+    
+        <Helmet>
           <title>Instagram Videos Downloader - DOWNTAPE Free Instagram Downloader Online</title>
           {/* <link rel="canonical" href="https://www.downtape.herokuapp.com/youtube-video-downloader" />
           <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
           <meta name="keywords" content="youtube video download, youtube video download online, online youtube video download, free youtube video download, youtube video download by link, youtube video download free, save youtube video download, youtube video download pc, youtube video download link, youtube video download website, how to youtube video download, youtube video download site, youtube video download mp4, youtube video download online free, youtube video downloader, online youtube video downloader, youtube video downloader for pc, youtube video downloader free download, best youtube video downloader, free youtube video downloader, download youtube video, download youtube videos, how to download youtube video, how to download youtube video in laptop, how download youtube video, how to download youtube videos in mobile, download youtube video online, how to download youtube video online, download youtube video online free, how download youtube video online" /> */}
         </Helmet>
-      </HelmetProvider>
+      
         <Container component="main" maxWidth="md">
-            <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
+            <div className={classes.searchDiv}>
+                <Typography component="h1" variant="h4">
                 Instagram Video Downloader
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
@@ -124,6 +125,7 @@ const InstagramVideosDownloader = () => {
                 </form>
             </div>
         </Container>
+        <InstagramTextContent/>
         <ToastContainer position="top-center" />
     </>
   );
