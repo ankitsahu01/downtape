@@ -32,7 +32,7 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
     "fontWeightRegular": 500
-  }
+  },
   
 });
 

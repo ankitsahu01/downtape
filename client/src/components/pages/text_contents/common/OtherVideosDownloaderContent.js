@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
     },
     activeLink: {
       borderBottom: "1px solid",
-    }
+    },
+    secondaryText: {
+      color: theme.palette.grey[600],
+  },
   }));
 
 const OtherVideosDownloader = () => {
@@ -60,7 +63,7 @@ const OtherVideosDownloader = () => {
                     <Typography
                       component="span"
                       variant="body2"
-                      color="textSecondary"
+                      className={classes.secondaryText}
                     >
                       The service is ideal for downloading from YouTube in HD
                       with no need to install any apps. Just use any web browser
@@ -91,7 +94,7 @@ const OtherVideosDownloader = () => {
                     <Typography
                       component="span"
                       variant="body2"
-                      color="textSecondary"
+                      className={classes.secondaryText}
                     >
                       Downloading stories and other videos from Instagram is
                       quite possible. DownTape can act as an Instagram
@@ -122,7 +125,7 @@ const OtherVideosDownloader = () => {
                     <Typography
                       component="span"
                       variant="body2"
-                      color="textSecondary"
+                      className={classes.secondaryText}
                     >
                       DownTape allows you to download Twitter videos in MP4
                       formats.
@@ -162,7 +165,7 @@ const OtherVideosDownloader = () => {
                     <Typography
                       component="span"
                       variant="body2"
-                      color="textSecondary"
+                      className={classes.secondaryText}
                     >
                       DownTape allows you to download Vimeo videos with the
                       ability to choose the quality of the video.

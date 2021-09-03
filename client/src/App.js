@@ -7,6 +7,9 @@ import YoutubeVideosDownloader from "./components/pages/YoutubeVideosDownloader"
 import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
 import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
 import VimeoVideosDownloader from "./components/pages/VimeoVideosDownloader";
+import Faq from "./components/pages/Faq";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import Terms from "./components/pages/Terms";
 import NotFound from "./components/pages/NotFound";
 import Test from "./components/pages/Test";
 import CustomSwitch from "./components/CustomSwitch";
@@ -31,12 +34,21 @@ const App = () => {
         <Route path="/vimeo-video-downloader">
           <VimeoVideosDownloader />
         </Route>
+        <Route path="/frequently-asked-questions">
+          <Faq />
+        </Route>
+        <Route path="/privacy-policy">
+          <PrivacyPolicy />
+        </Route>
+        <Route path="/terms-of-service">
+          <Terms />
+        </Route>
         <Route path="/test">
           <Test />
         </Route>
-        <NotFound/>
+        <NotFound />
       </CustomSwitch>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -42,7 +42,7 @@ const Footer = () => {
     { name: "Vimeo Video Downloader", link: "/vimeo-video-downloader" },
   ];
   const otherLinks = [
-    { name: "About", link: "/about" },
+    { name: "FAQ", link: "/frequently-asked-questions" },
     { name: "Contact", link: "/contact" },
     { name: "Privacy Policy", link: "/privacy-policy" },
     { name: "Terms of Service", link: "/terms-of-service" },
