@@ -46,7 +46,7 @@ const App = () => {
         <Route path="/test">
           <Test />
         </Route>
-        <Route path="/api"/>
+        <Route path="/api" render={()=>{return (<div>Api Call</div>)}} />
         <NotFound />
       </CustomSwitch>
       <Footer />
