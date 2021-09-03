@@ -46,10 +46,9 @@ const App = () => {
         <Route path="/test">
           <Test />
         </Route>
-        
-        {/* <Route path="*" exact>
+        <Route path="*" exact>
           <NotFound />
-        </Route> */}
+        </Route>
       </CustomSwitch>
       <Footer />
     </>
