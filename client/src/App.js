@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-// import HomePage from './components/pages/HomePage';
+import HomePage from './components/pages/HomePage';
 import YoutubeVideosDownloader from "./components/pages/YoutubeVideosDownloader";
 import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
 import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
@@ -20,7 +20,7 @@ const App = () => {
       <Navbar />
       <CustomSwitch>
         <Route path="/" exact>
-          <Redirect to="/youtube-video-downloader" />
+          <HomePage/>
         </Route>
         <Route path="/youtube-video-downloader">
           <YoutubeVideosDownloader />
