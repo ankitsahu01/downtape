@@ -45,7 +45,14 @@ const useStyles = makeStyles((theme) => ({
   alignicons: {
     display: 'flex',
     alignItems: 'center',
-  }
+  },
+  igTitle: {
+    backgroundColor: theme.palette.secondary.main,
+    background: theme.palette.instagram.main,
+    backgroundSize: '100%',
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent"
+  },
 }));
 
 const InstagramVideosDownloader = () => {
@@ -90,7 +97,7 @@ const InstagramVideosDownloader = () => {
         <Container component="main" maxWidth="md">
             <div className={classes.searchDiv}>
                 <Typography component="h1" variant="h4">
-                Instagram Video Downloader
+                  <span className={classes.igTitle}>Instagram</span> Video Downloader
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
                 <Grid container spacing={1}>

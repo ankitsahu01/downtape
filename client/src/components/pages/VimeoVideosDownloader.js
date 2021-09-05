@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
         display:'flex',
         flexDirection:'column',
         justifyContent:'center'
+    },
+    title: {
+        color: theme.palette.primary.light,
     }
 }));
 
@@ -148,7 +151,7 @@ const VimeoVideosDownloader=()=> {
         <Container component="main" maxWidth="md">
             <div className={classes.searchDiv}>
                 <Typography component="h1" variant="h4">
-                Vimeo Video Downloader
+                    <span className={classes.title}>Vimeo</span> Video Downloader
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
                 <Grid container spacing={1}>

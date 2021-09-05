@@ -11,36 +11,40 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    navlink: {
-      textDecoration: "none",
-      '&:hover':{
-        borderBottom: "1px solid",
-      }
-    },
-    activeLink: {
+  root: {
+    flexGrow: 1,
+  },
+  navlink: {
+    textDecoration: "none",
+    "&:hover": {
       borderBottom: "1px solid",
     },
-    secondaryText: {
-      color: theme.palette.grey[600],
   },
-  }));
+  activeLink: {
+    borderBottom: "1px solid",
+  },
+  secondaryText: {
+    color: theme.palette.grey[600],
+  },
+}));
 
-const OtherVideosDownloader = () => {
+const OtherVideosDownloader = (props) => {
   const classes = useStyles();
   return (
     <>
       <Paper component={Box} square elevation={0} p={5}>
+      <Container maxWidth="md">
         <Typography component="h3" variant="h4" align="center">
-          <Box mb={1}>Other Videos Downloader</Box>
+          <Box mb={1}>
+          {
+            props.title || 'Other Videos Downloader'
+          }
+          </Box>
         </Typography>
-        <Typography paragraph={true} align="center" gutterBottom>
+        <Typography paragraph align="center" gutterBottom>
           DownTape Video Downloader is a versatile online video Downloader.
           Using it you can easily download other Social Media Videos.
         </Typography>
-        <Container maxWidth="md">
           <Grid container spacing={2} className={classes.root}>
             <Grid item sm={12} md={6}>
               <ListItem alignItems="flex-start">

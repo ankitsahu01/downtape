@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection:'column',
         justifyContent:'center'
     },
+    ytTitle: {
+        color: theme.palette.youtube.secondary,
+    }
 }));
 
 const YoutubeVideosDownloader=()=> {
@@ -155,7 +158,7 @@ const YoutubeVideosDownloader=()=> {
             <Container component="main" maxWidth="md">
             <div className={classes.searchDiv}>
                 <Typography component="h1" variant="h4">
-                  YouTube Video Downloader
+                  <span className={classes.ytTitle}>YouTube</span> Video Downloader
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={searchVideo}>
                 <Grid container spacing={1}>
