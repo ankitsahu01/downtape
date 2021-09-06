@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import {useReducer} from 'react';
 import { Helmet } from 'react-helmet-async';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';

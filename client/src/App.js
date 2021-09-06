@@ -1,10 +1,11 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
-import HomePage from "./components/pages/HomePage";
-import YoutubeVideosDownloader from "./components/pages/YoutubeVideosDownloader";
-import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
-import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
-import VimeoVideosDownloader from "./components/pages/VimeoVideosDownloader";
+// import Navbar from "./components/Navbar";
+// import HomePage from "./components/pages/HomePage";
+// import YoutubeVideosDownloader from "./components/pages/YoutubeVideosDownloader";
+// import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
+// import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
+// import VimeoVideosDownloader from "./components/pages/VimeoVideosDownloader";
 import Faq from "./components/pages/Faq";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import Terms from "./components/pages/Terms";
@@ -12,15 +13,20 @@ import NotFound from "./components/pages/NotFound";
 import Test from "./components/pages/Test";
 import CustomSwitch from "./components/CustomSwitch";
 import LazyLoader from "./components/LazyLoader";
+
 const Navbar = lazy(() => import("./components/Navbar"));
+const HomePage = lazy(() => import("./components/pages/HomePage"));
+const YoutubeVideosDownloader = lazy(() => import("./components/pages/YoutubeVideosDownloader"));
+const InstagramVideosDownloader = lazy(() => import("./components/pages/InstagramVideosDownloader"));
+const TwitterVideosDownloader = lazy(() => import("./components/pages/TwitterVideosDownloader"));
+const VimeoVideosDownloader = lazy(() => import("./components/pages/VimeoVideosDownloader"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const App = () => {
   return (
     <>
       <Suspense fallback={<LazyLoader />}>
-        <Navbar />
-      </Suspense>
+      <Navbar />
       <CustomSwitch>
         <Route path="/" exact>
           <HomePage />
@@ -53,7 +59,8 @@ const App = () => {
           <NotFound />
         </Route>
       </CustomSwitch>
-      <Suspense fallback={<LazyLoader />}>
+      {/* </Suspense>
+      <Suspense fallback={<LazyLoader />}> */}
         <Footer />
       </Suspense>
     </>
