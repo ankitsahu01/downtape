@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { CssBaseline, ThemeProvider } from "@material-ui/core";
-import { BrowserRouter } from "react-router-dom";
+import BrowserRouter from "react-router-dom/BrowserRouter";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from '@material-ui/core/styles';
 import App from "./App";
 import theme from "./theme";
 

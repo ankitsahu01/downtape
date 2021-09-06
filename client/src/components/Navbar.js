@@ -1,10 +1,14 @@
 import React from "react";
-import {NavLink} from 'react-router-dom';
+import NavLink from "react-router-dom/NavLink";
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, Typography} from '@material-ui/core';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import {Fab, Slide, Zoom} from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
+import Slide from '@material-ui/core/Slide';
+import Zoom from '@material-ui/core/Zoom';
 
 const useStyles = makeStyles((theme) => ({
   scrollTop: {
