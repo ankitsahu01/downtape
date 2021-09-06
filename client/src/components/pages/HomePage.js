@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 // import { makeStyles } from "@material-ui/core";
 import OtherVideosDownloader from './text_contents/common/OtherVideosDownloaderContent';
 import { Container, Typography, Box, Paper } from '@material-ui/core';
@@ -14,6 +15,9 @@ const HomePage=()=> {
 //   const classes = useStyles();
     return (
         <>
+        <Helmet>
+          <title>DownTape Videos Downloader</title>
+        </Helmet>
         <Paper
         component={Box}
         square
