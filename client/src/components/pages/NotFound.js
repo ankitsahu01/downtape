@@ -1,12 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { makeStyles } from '@material-ui/core/styles';
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box, Container, Typography } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
-import NavLink from "react-router-dom/NavLink";
+import { NavLink } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   title: {
