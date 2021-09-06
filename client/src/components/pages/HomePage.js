@@ -1,8 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-// import { makeStyles } from "@material-ui/core";
+// import { makeStyles } from '@material-ui/core/styles';
 import OtherVideosDownloader from './text_contents/common/OtherVideosDownloaderContent';
-import { Container, Typography, Box, Paper } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 
 // const useStyles = makeStyles((theme) => ({
 //     changeBg: {

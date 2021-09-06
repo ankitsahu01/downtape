@@ -1,8 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { makeStyles } from "@material-ui/core";
-import { Container, Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
   root: {
