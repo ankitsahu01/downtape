@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet-async";
 import { makeStyles } from '@material-ui/core/styles';
 import {Box, Container, Grid} from '@material-ui/core';
 import {Button, TextField, Typography} from '@material-ui/core';
