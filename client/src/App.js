@@ -1,8 +1,6 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import HomePage from './components/pages/HomePage';
+import HomePage from "./components/pages/HomePage";
 import YoutubeVideosDownloader from "./components/pages/YoutubeVideosDownloader";
 import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
 import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
@@ -13,14 +11,19 @@ import Terms from "./components/pages/Terms";
 import NotFound from "./components/pages/NotFound";
 import Test from "./components/pages/Test";
 import CustomSwitch from "./components/CustomSwitch";
+import LazyLoader from "./components/LazyLoader";
+const Navbar = lazy(() => import("./components/Navbar"));
+const Footer = lazy(() => import("./components/Footer"));
 
 const App = () => {
   return (
     <>
-      <Navbar />
+      <Suspense fallback={<LazyLoader />}>
+        <Navbar />
+      </Suspense>
       <CustomSwitch>
         <Route path="/" exact>
-          <HomePage/>
+          <HomePage />
         </Route>
         <Route path="/youtube-video-downloader">
           <YoutubeVideosDownloader />
@@ -50,7 +53,9 @@ const App = () => {
           <NotFound />
         </Route>
       </CustomSwitch>
-      <Footer />
+      <Suspense fallback={<LazyLoader />}>
+        <Footer />
+      </Suspense>
     </>
   );
 };
