@@ -10,6 +10,7 @@ const getContentLength= (url)=>{
             const clen= response.headers['content-length'];
             resolve(JSON.parse(clen));
             response.on('error', (error) => {
+                console.log(error);
                 throw error;
             });
         });
@@ -21,6 +22,7 @@ router.get('/info', (req, res)=>{
     twdl.getInfo(url, {}, async(error, info) => {
         try{
             if(error){
+                console.log(error);
                 throw error;
             }else{
                 const requiredInfo= {
