@@ -9,12 +9,12 @@ const AboutDownloader = lazy(() => import("../common/AboutDownloader"));
 const DownloaderPageContent = ({title, img, downloadSteps, description}) => {
   return (
     <>
+      <HowToDownload
+        title={title}
+        img={img}
+        downloadSteps={downloadSteps}
+      />
       <Suspense fallback={<TopBarProgress />}>
-        <HowToDownload
-          title={title}
-          img={img}
-          downloadSteps={downloadSteps}
-        />
         <AvailableVideosDownloader />
         <AboutDownloader
           title={title}

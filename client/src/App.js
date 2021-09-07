@@ -1,25 +1,18 @@
 import { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-// import HomePage from "./components/pages/HomePage";
-// import YoutubeVideosDownloader from "./components/pages/Downloader";
-// import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloader";
-// import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
-// import VimeoVideosDownloader from "./components/pages/VimeoVideosDownloader";
-import Faq from "./components/pages/Faq";
-import PrivacyPolicy from "./components/pages/PrivacyPolicy";
-import Terms from "./components/pages/Terms";
-import NotFound from "./components/pages/NotFound";
-import Test from "./components/pages/Test";
-import CustomSwitch from "./components/CustomSwitch";
 import TopBarProgress from "react-topbar-progress-indicator";
-
-// const Navbar = lazy(() => import("./components/Navbar"));
+import CustomSwitch from "./components/CustomSwitch";
 const HomePage = lazy(() => import("./components/pages/HomePage"));
 const YoutubeVideosDownloader = lazy(() => import("./components/pages/YoutubeVideosDownloader"));
 const InstagramVideosDownloader = lazy(() => import("./components/pages/InstagramVideosDownloader"));
 const TwitterVideosDownloader = lazy(() => import("./components/pages/TwitterVideosDownloader"));
 const VimeoVideosDownloader = lazy(() => import("./components/pages/VimeoVideosDownloader"));
+const Faq = lazy(() => import("./components/pages/Faq"));
+const PrivacyPolicy = lazy(() => import("./components/pages/PrivacyPolicy"));
+const Terms = lazy(() => import("./components/pages/Terms"));
+const NotFound = lazy(() => import("./components/pages/NotFound"));
+const Test = lazy(() => import("./components/pages/Test"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const App = () => {
