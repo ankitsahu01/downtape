@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta
+      name="viewport"
+      content="minimum-scale=1, initial-scale=1, width=device-width"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="favicon.ico" />
-  <link rel="shortcut icon" href="favicon.ico" />
-  <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-
-  <meta name="theme-color" content="#000000" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="manifest" href="manifest.json" />
-  <!--
+    <meta name="theme-color" content="#000000" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -19,70 +21,70 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  
-  <meta name="title" content="DOWNTAPE" data-react-helmet="true">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
-  
-  <meta name="google-site-verification" content="_jvKu9ixbbCZdj934ZevLSsxiQUe1rh1wcOu_qlcQtc" />
-  
-  <style type="text/css">
-    .loader-container {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-    }
 
-    .loader-container .loading {
-      font: 300 3em/150% Impact;
-    }
+    <meta name="title" content="DOWNTAPE" data-react-helmet="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
 
-    .loader-container .loading::after {
-      content: ' .';
-      color: #1976d2;
-      animation: dots 1s steps(5, end) infinite;
-    }
+    <meta
+      name="google-site-verification"
+      content="_jvKu9ixbbCZdj934ZevLSsxiQUe1rh1wcOu_qlcQtc"
+    />
 
-    @keyframes dots {
-      0%, 20% {
-        color: rgba(0, 0, 0, 0);
-        text-shadow:
-          .25em 0 0 rgba(0, 0, 0, 0),
-          .5em 0 0 rgba(0, 0, 0, 0);
+    <style type="text/css">
+      .loader-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
       }
-      40% {
+
+      .loader-container .loading {
+        font: 300 3em/150% Impact;
+      }
+
+      .loader-container .loading::after {
+        content: " .";
         color: #1976d2;
-        text-shadow:
-          .25em 0 0 rgba(0, 0, 0, 0),
-          .5em 0 0 rgba(0, 0, 0, 0);
+        animation: dots 1s steps(5, end) infinite;
       }
-      60% {
-        text-shadow:
-          .25em 0 0 #1976d2,
-          .5em 0 0 rgba(0, 0, 0, 0);
-      }
-      80%, 100% {
-        text-shadow:
-          .25em 0 0 #1976d2,
-          .5em 0 0 #1976d2;
-      }
-    }
-  </style>
-</head>
 
-<body>
-  <noscript>You need to enable JavaScript to access this Website.</noscript>
-  <div id="root">
-    <div class="loader-container">
-      <h1 class="loading"><span style="color:#1976d2;">Loading</span></h1>
+      @keyframes dots {
+        0%,
+        20% {
+          color: rgba(0, 0, 0, 0);
+          text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+        }
+        40% {
+          color: #1976d2;
+          text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+        }
+        60% {
+          text-shadow: 0.25em 0 0 #1976d2, 0.5em 0 0 rgba(0, 0, 0, 0);
+        }
+        80%,
+        100% {
+          text-shadow: 0.25em 0 0 #1976d2, 0.5em 0 0 #1976d2;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to access this Website.</noscript>
+    <div id="root">
+      <div class="loader-container">
+        <h1 class="loading"><span style="color: #1976d2">Loading</span></h1>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

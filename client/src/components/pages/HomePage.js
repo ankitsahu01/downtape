@@ -1,25 +1,15 @@
-// import { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
-// import { makeStyles } from '@material-ui/core/styles';
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
-// import LazyLoader from "../LazyLoader";
-// const OtherVideosDownloader = lazy(() =>
-//   import("./text_contents/common/OtherVideosDownloaderContent")
-// );
-import OtherVideosDownloader from "./text_contents/common/OtherVideosDownloaderContent";
-
-// const useStyles = makeStyles((theme) => ({
-//     changeBg: {
-//       color: theme.palette.light.main,
-//       background: theme.palette.navGr.main,
-//     }
-// }));
+import TopBarProgress from "react-topbar-progress-indicator";
+const AvailableVideosDownloader = lazy(() =>
+  import("./common/AvailableDownloaders")
+);
 
 const HomePage = () => {
-  //   const classes = useStyles();
   return (
     <>
       <Helmet>
@@ -40,9 +30,9 @@ const HomePage = () => {
         </Container>
       </Paper>
 
-      {/* <Suspense fallback={<LazyLoader />}> */}
-        <OtherVideosDownloader title={"Availabe Videos Downloader"} />
-      {/* </Suspense> */}
+      <Suspense fallback={<TopBarProgress />}>
+        <AvailableVideosDownloader />
+      </Suspense>
     </>
   );
 };

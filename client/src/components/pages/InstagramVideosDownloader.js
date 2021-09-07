@@ -11,7 +11,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import InstagramTextContent from './text_contents/InstagramTextContent';
+import DownloaderPageContent from './text_contents/DownloaderPageContent';
 
 const useStyles = makeStyles((theme) => ({
   searchDiv: {
@@ -62,6 +62,17 @@ const InstagramVideosDownloader = () => {
   const [url, setUrl]= useState('');
   const [toggleLoader, setToggleLoader]= useState({ 'display':'none' });
   const classes = useStyles();
+
+  const downloadSteps = [
+    "Copy the URL of the video which you need to download.",
+    "Paste URL in the search field.",
+    "Click the “Download” button to start downloading the file.",
+  ];
+  const AboutDownloaderDescription=`DownTape Instagram video downloader provides fastest service to download
+  videos in mp4, mp3, SQ, HD, Full HD quality from Instagram! For more
+  convenient viewing on a large screen video can be saved in high
+  quality. To watch videos on Android or iOS phones the medium
+  quality will be enough.`;
 
   const searchVideo= async (e)=>{
     try{
@@ -135,7 +146,12 @@ const InstagramVideosDownloader = () => {
                 </form>
             </div>
         </Container>
-        <InstagramTextContent/>
+        <DownloaderPageContent
+        title="Instagram"
+        img="instagram.jpg"
+        downloadSteps={downloadSteps}
+        description={AboutDownloaderDescription}
+      />
         <ToastContainer position="top-center" />
     </>
   );
