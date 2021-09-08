@@ -1,13 +1,9 @@
-import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
-import TopBarProgress from "react-topbar-progress-indicator";
-const AvailableVideosDownloader = lazy(() =>
-  import("./common/AvailableDownloaders")
-);
+import AvailableVideosDownloader from './common/AvailableDownloaders';
 
 const HomePage = () => {
   return (
@@ -30,9 +26,7 @@ const HomePage = () => {
         </Container>
       </Paper>
 
-      <Suspense fallback={<TopBarProgress />}>
-        <AvailableVideosDownloader />
-      </Suspense>
+      <AvailableVideosDownloader />
     </>
   );
 };

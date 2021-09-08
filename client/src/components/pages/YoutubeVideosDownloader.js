@@ -1,4 +1,4 @@
-import { useReducer, lazy, Suspense } from "react";
+import { useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
@@ -13,9 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { initialVideo, reducer } from "../../reducers/YoutubeReducer";
 import { sToTime } from "../Converters";
 import DownloaderPageContent from "./text_contents/DownloaderPageContent";
-const YoutubeVideoSearchResult = lazy(() =>
-  import("./text_contents/YoutubeVideoSearchResult")
-);
+import YoutubeVideoSearchResult from "./text_contents/YoutubeVideoSearchResult";
 
 const useStyles = makeStyles((theme) => ({
   searchDiv: {
@@ -149,16 +147,14 @@ const YoutubeVideosDownloader = () => {
           </form>
         </div>
       </Container>
-      <Suspense fallback="">
-        <YoutubeVideoSearchResult
-          video={video}
-          dispatch={dispatch}
-          downloadVideo={downloadVideo}
-        />
-      </Suspense>
+      <YoutubeVideoSearchResult
+        video={video}
+        dispatch={dispatch}
+        downloadVideo={downloadVideo}
+      />
       <DownloaderPageContent
         title="YouTube"
-        img="youtube.jpg"
+        img="youtube.webp"
         downloadSteps={downloadSteps}
         description={AboutDownloaderDescription}
       />

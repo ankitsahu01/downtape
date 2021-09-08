@@ -1,10 +1,6 @@
-import { lazy, Suspense } from "react";
-import TopBarProgress from "react-topbar-progress-indicator";
-const HowToDownload = lazy(() => import("../common/HowToDownload"));
-const AvailableVideosDownloader = lazy(() =>
-  import("../common/AvailableDownloaders")
-);
-const AboutDownloader = lazy(() => import("../common/AboutDownloader"));
+import HowToDownload from "../common/HowToDownload";
+import AvailableDownloaders from "../common/AvailableDownloaders";
+import AboutDownloader from "../common/AboutDownloader";
 
 const DownloaderPageContent = ({title, img, downloadSteps, description}) => {
   return (
@@ -14,13 +10,11 @@ const DownloaderPageContent = ({title, img, downloadSteps, description}) => {
         img={img}
         downloadSteps={downloadSteps}
       />
-      <Suspense fallback={<TopBarProgress />}>
-        <AvailableVideosDownloader />
-        <AboutDownloader
-          title={title}
-          description={description}
-        />
-      </Suspense>
+      <AvailableDownloaders />
+      <AboutDownloader
+        title={title}
+        description={description}
+      />
     </>
   );
 };

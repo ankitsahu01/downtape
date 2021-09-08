@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,9 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { initialVideo, reducer } from "../../reducers/TwitterReducer";
 import { sToTime } from "../Converters";
 import DownloaderPageContent from "./text_contents/DownloaderPageContent";
-const TwitterVimeoVideoSearchResult = lazy(() =>
-  import("./text_contents/TwitterVimeoVideoSearchResult")
-);
+import TwitterVimeoVideoSearchResult from "./text_contents/TwitterVimeoVideoSearchResult";
 
 const useStyles = makeStyles((theme) => ({
   searchDiv: {
@@ -153,16 +150,14 @@ const TwitterVideosDownloader = () => {
           </form>
         </div>
       </Container>
-      <Suspense fallback="">
         <TwitterVimeoVideoSearchResult
           video={video}
           dispatch={dispatch}
           downloadVideo={downloadVideo}
         />
-      </Suspense>
       <DownloaderPageContent
         title="Twitter"
-        img="twitter.jpg"
+        img="twitter.webp"
         downloadSteps={downloadSteps}
         description={AboutDownloaderDescription}
       />

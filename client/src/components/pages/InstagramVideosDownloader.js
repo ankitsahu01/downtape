@@ -148,7 +148,7 @@ const InstagramVideosDownloader = () => {
         </Container>
         <DownloaderPageContent
         title="Instagram"
-        img="instagram.jpg"
+        img="instagram.webp"
         downloadSteps={downloadSteps}
         description={AboutDownloaderDescription}
       />
