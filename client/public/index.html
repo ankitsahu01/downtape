@@ -2,32 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="favicon.ico" />
-    <link rel="shortcut icon" href="favicon.ico" />
-    <meta
-      name="viewport"
-      content="minimum-scale=1, initial-scale=1, width=device-width"
-    />
-
-    <meta name="theme-color" content="#000000" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="title" content="DOWNTAPE" data-react-helmet="true" />
-    <meta
-      name="google-site-verification"
-      content="_jvKu9ixbbCZdj934ZevLSsxiQUe1rh1wcOu_qlcQtc"
-    />
-
+    <meta name="google-site-verification" content="_jvKu9ixbbCZdj934ZevLSsxiQUe1rh1wcOu_qlcQtc" />
     <style type="text/css">
       .loader-container {
         display: flex;
@@ -40,20 +24,17 @@
         left: 0;
         bottom: 0;
       }
-
       .loader-container .loading {
         font: 300 3em/150% Impact;
+        color: #1976d2;
       }
-
       .loader-container .loading::after {
         content: " .";
         color: #1976d2;
         animation: dots 1s steps(5, end) infinite;
       }
-
       @keyframes dots {
-        0%,
-        20% {
+        0%, 20% {
           color: rgba(0, 0, 0, 0);
           text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
         }
@@ -64,8 +45,7 @@
         60% {
           text-shadow: 0.25em 0 0 #1976d2, 0.5em 0 0 rgba(0, 0, 0, 0);
         }
-        80%,
-        100% {
+        80%, 100% {
           text-shadow: 0.25em 0 0 #1976d2, 0.5em 0 0 #1976d2;
         }
       }
@@ -76,12 +56,11 @@
       }
     </script>
   </head>
-
   <body>
     <noscript>You need to enable JavaScript to access this Website.</noscript>
     <div id="root">
       <div class="loader-container">
-        <h1 class="loading"><span style="color: #1976d2">Loading</span></h1>
+        <span class="loading">Loading</span>
       </div>
     </div>
   </body>

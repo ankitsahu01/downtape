@@ -50,7 +50,7 @@ const HowToDownload = (props) => {
             <Grid item sm={12} md={4}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
-                  <Box className={classes.setImg} style={{background:`url(${props.img})`}} />
+                  <Box className={classes.setImg} style={{background:`url(img/${props.img})`}} />
                 </Grid>
               </Grid>
             </Grid>
