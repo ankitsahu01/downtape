@@ -1,3 +1,4 @@
+import '@fontsource/raleway/500.css';
 import red from '@material-ui/core/colors/red';
 import { createTheme } from '@material-ui/core/styles';
 
@@ -41,7 +42,7 @@ const theme = createTheme({
       'Raleway',
       'sans-serif',
     ].join(','),
-    "fontWeightRegular": 500
+    "fontWeightRegular": 500,
   },
   
 });
