@@ -1,1 +1,0 @@
-{"version":3,"sources":["components/pages/Test.js"],"names":["Test"],"mappings":"qHAQeA,UARF,WACX,OACE,mCACE","file":"static/js/23.c5173ec2.chunk.js","sourcesContent":["const Test = () => {\r\n  return (\r\n    <>\r\n      <h1>Test Mode</h1>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default Test;\r\n"],"sourceRoot":""}
