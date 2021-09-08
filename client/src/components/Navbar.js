@@ -1,10 +1,11 @@
+import { lazy, Suspense } from "react";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import ScrollTop from "./ScrollTop";
+const ScrollTop = lazy(() => import("./ScrollTop"));
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -30,9 +31,11 @@ const Navbar = (props) => {
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
-      <ScrollTop {...props} goto="#back-to-top-anchor">
-        <KeyboardArrowUpIcon />
-      </ScrollTop>
+      <Suspense fallback="">
+        <ScrollTop {...props} goto="#back-to-top-anchor">
+          <KeyboardArrowUpIcon />
+        </ScrollTop>
+      </Suspense>
     </>
   );
 };

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/pages/HomePage";
@@ -11,7 +12,7 @@ import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import Terms from "./components/pages/Terms";
 import NotFound from "./components/pages/NotFound";
 import Test from "./components/pages/Test";
-import Footer from "./components/Footer";
+const Footer = lazy(() => import('./components/Footer'));
 
 const App = () => {
   return (
@@ -49,7 +50,9 @@ const App = () => {
           <NotFound />
         </Route>
       </CustomSwitch>
-      <Footer />
+      <Suspense fallback="">
+        <Footer />
+      </Suspense>
     </>
   );
 };
