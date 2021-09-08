@@ -13,8 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { initialVideo, reducer } from "../../reducers/YoutubeReducer";
 import { sToTime } from "../Converters";
 import DownloaderPageContent from "./text_contents/DownloaderPageContent";
-const VideoDetailsContainer = lazy(() =>
-  import("./text_contents/VideoDetailsContainer")
+const YoutubeVideoSearchResult = lazy(() =>
+  import("./text_contents/YoutubeVideoSearchResult")
 );
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     padding: theme.spacing(1.9),
   },
-  ytTitle: {
+  title: {
     color: theme.palette.youtube.secondary,
   },
 }));
@@ -113,7 +113,7 @@ const YoutubeVideosDownloader = () => {
       <Container component="main" maxWidth="md">
         <div className={classes.searchDiv}>
           <Typography component="h1" variant="h4">
-            <span className={classes.ytTitle}>YouTube</span> Video Downloader
+            <span className={classes.title}>YouTube</span> Video Downloader
           </Typography>
           <form className={classes.form} noValidate onSubmit={searchVideo}>
             <Grid container spacing={1}>
@@ -150,7 +150,7 @@ const YoutubeVideosDownloader = () => {
         </div>
       </Container>
       <Suspense fallback="">
-        <VideoDetailsContainer
+        <YoutubeVideoSearchResult
           video={video}
           dispatch={dispatch}
           downloadVideo={downloadVideo}
