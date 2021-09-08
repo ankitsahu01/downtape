@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,12 +12,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { initialVideo, reducer } from "../../reducers/TwitterReducer";
 import { sToTime } from "../Converters";
-const DownloaderPageContent = lazy(() =>
-  import("./text_contents/DownloaderPageContent")
-);
-const TwitterVimeoVideoSearchResult = lazy(() =>
-  import("./text_contents/TwitterVimeoVideoSearchResult")
-);
+import DownloaderPageContent from "./text_contents/DownloaderPageContent";
+import TwitterVimeoVideoSearchResult from "./text_contents/TwitterVimeoVideoSearchResult";
 
 const useStyles = makeStyles((theme) => ({
   searchDiv: {
@@ -155,7 +150,6 @@ const TwitterVideosDownloader = () => {
           </form>
         </div>
       </Container>
-      <Suspense fallback="">
         <TwitterVimeoVideoSearchResult
           video={video}
           dispatch={dispatch}
@@ -167,7 +161,6 @@ const TwitterVideosDownloader = () => {
         downloadSteps={downloadSteps}
         description={AboutDownloaderDescription}
       />
-      </Suspense>
       <ToastContainer position="top-center" />
     </>
   );
