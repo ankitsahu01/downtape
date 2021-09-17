@@ -7,6 +7,7 @@ import InstagramVideosDownloader from "./components/pages/InstagramVideosDownloa
 import TwitterVideosDownloader from "./components/pages/TwitterVideosDownloader";
 import VimeoVideosDownloader from "./components/pages/VimeoVideosDownloader";
 import Faq from "./components/pages/Faq";
+import Contact from "./components/pages/Contact";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import Terms from "./components/pages/Terms";
 import NotFound from "./components/pages/NotFound";
@@ -35,6 +36,9 @@ const App = () => {
         </Route>
         <Route path="/frequently-asked-questions">
           <Faq />
+        </Route>
+        <Route path="/contact">
+          <Contact />
         </Route>
         <Route path="/privacy-policy">
           <PrivacyPolicy />

@@ -12,7 +12,7 @@ app.use("/api/youtube", require("./routers/YoutubeRoutes"));
 app.use("/api/insta", require("./routers/InstaRoutes"));
 app.use("/api/twitter", require("./routers/TwitterRoutes"));
 app.use("/api/vimeo", require("./routers/VimeoRoutes"));
-app.use("/api/test", require("./routers/TestRoutes"));
+app.use("/api/mailer", require("./routers/Mailer"));
 
 var forceSsl = function (req, res, next) {
   if (req.headers["x-forwarded-proto"] !== "https") {

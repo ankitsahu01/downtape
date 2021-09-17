@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+require('dotenv').config();
 const Insta = require('scraper-instagram');
 const InstaClient = new Insta();
 
@@ -9,7 +10,7 @@ router.get('/getLink', async (req, res)=>{
       url= url.replace('?utm_medium=copy_link','');
       let shortcode= url.split('/');
       shortcode= shortcode[shortcode.length-2];
-      await InstaClient.authBySessionId('49024374510%3AEqCrXsT2J9WYE1%3A11');
+      await InstaClient.authBySessionId(process.env.INSTA_SESSION_ID);
       const data = await InstaClient.getPost(shortcode);
       const downloadLink= data.contents[0].url;
       res.status(200).json({downloadLink});

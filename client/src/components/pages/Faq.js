@@ -56,7 +56,7 @@ const Faq = () => {
   return (
     <>
       <Helmet>
-        <title>Downtape - Frequently Asked Questions</title>
+        <title>Frequently Asked Questions - DownTape</title>
       </Helmet>
       <Container component={Box} paddingY={6}>
         <Typography variant="h4" component="h1" align="center" gutterBottom>
