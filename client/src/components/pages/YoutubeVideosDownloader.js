@@ -74,12 +74,14 @@ const YoutubeVideosDownloader = () => {
       sr_anchor.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch (err) {
       dispatch({ type: "toggleLoader", payload: { display: "none" } });
-      if (err.response.status === 404) {
-        toast.error(err.response.data);
+      toast.error("Something Went Wrong, Try Later.");
+      console.log(err);
+      // if (err.response.status === 404) {
+      //   toast.error(err.response.data);
         // console.log(err.response.data);
-      } else {
-        toast.error("Something Went Wrong, Try Later.");
-      }
+      // } else {
+      //   toast.error("Something Went Wrong, Try Later.");
+      // }
     }
   };
 
