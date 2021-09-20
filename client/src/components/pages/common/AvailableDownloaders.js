@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -15,7 +14,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import SvgIcon from "@material-ui/core/SvgIcon";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  gridRoot: {
     flexGrow: 1,
   },
   navlink: {
@@ -36,7 +35,7 @@ const OtherVideosDownloader = () => {
   const classes = useStyles();
   return (
     <>
-      <Paper component={Box} square elevation={0} p={5}>
+      <Box p={5} bgcolor="light.main">
         <Container maxWidth="md">
           <Typography component="h3" variant="h4" align="center">
             <Box mb={1}>Available Videos Downloader</Box>
@@ -45,7 +44,7 @@ const OtherVideosDownloader = () => {
             DownTape Video Downloader is a versatile online video Downloader.
             Using it you can easily download other Social Media Videos.
           </Typography>
-          <Grid container spacing={2} className={classes.root}>
+          <Grid container spacing={2} className={classes.gridRoot}>
             <Grid item sm={12} md={6}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
@@ -180,7 +179,7 @@ const OtherVideosDownloader = () => {
             </Grid>
           </Grid>
         </Container>
-      </Paper>
+      </Box>
     </>
   );
 };

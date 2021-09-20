@@ -2,17 +2,15 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import ScrollTop from "./ScrollTop";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,
+  logo: {
+    width: 160,
   },
-  titlelink: {
-    color: theme.palette.light.main,
-    textDecoration: "none",
+  grbg: {
+    background: theme.palette.navGr.main,
   },
 }));
 
@@ -22,11 +20,14 @@ const Navbar = (props) => {
     <>
       <AppBar className={classes.grbg}>
         <Toolbar>
-          <Typography variant="h6" component="h1" className={classes.title}>
-            <NavLink to="/" className={classes.titlelink}>
-              DOWNTAPE
-            </NavLink>
-          </Typography>
+          <NavLink to="/">
+            <img
+              src="/img/downtape_logo.svg"
+              alt="downtape logo"
+              width='200'
+              style={{marginTop:5}}
+            />
+          </NavLink>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

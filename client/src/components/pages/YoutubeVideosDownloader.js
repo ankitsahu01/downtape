@@ -17,7 +17,7 @@ import YoutubeVideoSearchResult from "./text_contents/YoutubeVideoSearchResult";
 
 const useStyles = makeStyles((theme) => ({
   searchDiv: {
-    marginTop: theme.spacing(10),
+    marginTop: theme.spacing(7),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -70,7 +70,7 @@ const YoutubeVideosDownloader = () => {
       // console.log(formats);
       dispatch({ type: "formats", payload: formats });
       dispatch({ type: "toDownload", payload: { itag: formats[0].itag } });
-      const sr_anchor = document.querySelector("#search-result");
+      const sr_anchor = document.querySelector("#yt-search-result");
       sr_anchor.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch (err) {
       dispatch({ type: "toggleLoader", payload: { display: "none" } });
@@ -149,6 +149,7 @@ const YoutubeVideosDownloader = () => {
           </form>
         </div>
       </Container>
+      <div id="yt-search-result" />
       <YoutubeVideoSearchResult
         video={video}
         dispatch={dispatch}

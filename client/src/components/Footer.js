@@ -15,14 +15,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
   },
-  logo: {
+  logoContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-  },
-  logoLink: {
-    color: theme.palette.light.main,
-    textDecoration: "none",
   },
   navLink: {
     color: theme.palette.primary.light,
@@ -56,10 +52,16 @@ const Footer = () => {
         <Container maxWidth={false}>
           <Toolbar>
             <Grid container spacing={0}>
-              <Grid item xs={12} md={6} className={classes.logo}>
-                <Typography paragraph variant="h4" align="center">
-                  <NavLink to="/" className={classes.logoLink}>DownTape</NavLink>
-                </Typography>
+              <Grid item xs={12} md={6} className={classes.logoContainer}>
+                <Container align="center">
+                  <NavLink to="/">
+                    <img
+                      src="/img/downtape_logo.svg"
+                      alt="downtape logo"
+                      width="190"
+                    />
+                  </NavLink>
+                </Container>
                 <Typography paragraph variant="subtitle2" align="center">
                   © 2021 DownTape
                 </Typography>

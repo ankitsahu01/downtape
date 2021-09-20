@@ -1,13 +1,16 @@
 import { Helmet } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    paddingTop: theme.spacing(5),
+    minHeight: '80vh',
+  },
   title: {
     fontSize: theme.spacing(20),
     opacity: 0.2,
@@ -29,7 +32,7 @@ const NotFound = () => {
           <meta name="description" content="Download YouTube videos Online Free on DOWNTAPE. We provides you the best YouTube video downloader, In which you can download YouTube videos in mp4"/>
           */}
       </Helmet>
-      <Container component={Box} pt={5} minHeight="80vh">
+      <Container className={classes.root}>
         <Typography
           variant="h1"
           component="h1"

@@ -44,7 +44,7 @@ const VideoDetailsContainer = ({ video, dispatch, downloadVideo }) => {
   }
   return (
     <>
-      <Container component="main" maxWidth="md" id="search-result">
+      <Container component="main" maxWidth="md">
         <div className={classes.DetailsContainer}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>

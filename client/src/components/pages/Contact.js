@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -47,7 +46,7 @@ const Contact = () => {
         <title>Contact Us - DownTape</title>
       </Helmet>
       <Container maxWidth="sm">
-        <Box component={Paper} p={3} marginY={8} boxShadow={3}>
+        <Box p={3} marginY={6} boxShadow={3} bgcolor='light.main'>
           <Typography componant="h1" variant="h4" gutterBottom align="center">
             Contact Or Feedback
           </Typography>

@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
 import AvailableVideosDownloader from "./common/AvailableDownloaders";
 
 const HomePage = () => {
@@ -11,7 +10,7 @@ const HomePage = () => {
       <Helmet>
         <title>DownTape Videos Downloader</title>
       </Helmet>
-      <Paper component={Box} square elevation={0} p={4} pt={5}>
+      <Box p={4} pt={5} bgcolor='light.main'>
         <Container maxWidth="md">
           <Typography component="h1" variant="h4" align="center" gutterBottom>
             <Box>DownTape Videos Downloader</Box>
@@ -24,7 +23,7 @@ const HomePage = () => {
             quality will be enough.
           </Typography>
         </Container>
-      </Paper>
+      </Box>
 
       <AvailableVideosDownloader />
     </>

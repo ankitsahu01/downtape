@@ -17,7 +17,7 @@ import TwitterVimeoVideoSearchResult from "./text_contents/TwitterVimeoVideoSear
 
 const useStyles = makeStyles((theme) => ({
   searchDiv: {
-    marginTop: theme.spacing(10),
+    marginTop: theme.spacing(7),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -70,6 +70,8 @@ const VimeoVideosDownloader = () => {
       });
       dispatch({ type: "formats", payload: formats });
       dispatch({ type: "toDownload", payload: { url: formats[0].url } });
+      const sr_anchor = document.querySelector("#vm-search-result");
+      sr_anchor.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch (err) {
       dispatch({ type: "toggleLoader", payload: { display: "none" } });
       if (err.response.status === 404) {
@@ -138,11 +140,12 @@ const VimeoVideosDownloader = () => {
           </form>
         </div>
       </Container>
-        <TwitterVimeoVideoSearchResult
-          video={video}
-          dispatch={dispatch}
-          downloadVideo={downloadVideo}
-        />
+      <div id="vm-search-result" />
+      <TwitterVimeoVideoSearchResult
+        video={video}
+        dispatch={dispatch}
+        downloadVideo={downloadVideo}
+      />
       <DownloaderPageContent
         title="Vimeo"
         img="vimeo.webp"

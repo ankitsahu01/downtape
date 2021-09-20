@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Box from '@material-ui/core/Box';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
@@ -9,6 +8,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
   secondaryText: {
     color: theme.palette.grey[600],
   },
@@ -58,7 +61,7 @@ const Faq = () => {
       <Helmet>
         <title>Frequently Asked Questions - DownTape</title>
       </Helmet>
-      <Container component={Box} paddingY={6}>
+      <Container className={classes.root}>
         <Typography variant="h4" component="h1" align="center" gutterBottom>
           Frequently Asked Questions
         </Typography>
