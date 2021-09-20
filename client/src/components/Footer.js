@@ -58,7 +58,7 @@ const Footer = () => {
                     <img
                       src="/img/downtape_logo.svg"
                       alt="downtape logo"
-                      width="190"
+                      style={{width:'190px'}}
                     />
                   </NavLink>
                 </Container>

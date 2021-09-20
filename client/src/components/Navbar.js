@@ -24,8 +24,7 @@ const Navbar = (props) => {
             <img
               src="/img/downtape_logo.svg"
               alt="downtape logo"
-              width='200'
-              style={{marginTop:5}}
+              style={{width:'200px', marginTop:5}}
             />
           </NavLink>
         </Toolbar>
