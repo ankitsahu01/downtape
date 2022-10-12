@@ -4,21 +4,17 @@ require("dotenv").config();
 const Insta = require("scraper-instagram");
 const InstaClient = new Insta();
 
-
 /*
 https://www.instagram.com/p/CjI_B_7p4It/?hl=en
 https://www.instagram.com/p/CjGLK4Qjwfj/?hl=en
 */
-
-const tmp = require('instatouch');
-tmp.getPostMeta('https://www.instagram.com/p/CjI_B_7p4It/').then((data)=>{
-  console.log(data)
-}).catch((err)=>console.log(err))
-
+const instagramGetUrl = require("instagram-url-direct")
 
 router.get("/getLink", async (req, res) => {
   try {
     let url = req.query.url;
+    let links = await instagramGetUrl(url);
+    console.log(links);
     url = url.replace("?utm_medium=copy_link", "");
     let shortcode = url.split("/");
     shortcode = shortcode[shortcode.length - 2];
