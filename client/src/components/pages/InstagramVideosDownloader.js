@@ -94,7 +94,7 @@ const InstagramVideosDownloader = () => {
     }catch(err){
       setToggleLoader({ 'display':'none' });
       toast.error("Something Went Wrong. Try Later!");
-      console.log(err);
+      console.log(err.message);
     }
   }
 
